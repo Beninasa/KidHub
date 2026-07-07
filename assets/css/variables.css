@@ -1,15 +1,13 @@
 :root {
   /* Background */
   --color-background: #f5f5f5;
-
-  /* Surface */
-  --color-surface: #ffffff;
+  --color-background-header: #ba9e88;
 
   /* Dark */
   --color-dark: #121212;
 
   /* Text */
-  --color-text: #0b0b0b;
+  --color-text: #121212;
   --color-text-light: #ffffff;
 
   /* Border */

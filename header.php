@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html <?php language_attributes(); ?>>
+
 <head>
-    <meta charset="UTF-8">
-    <title>KidHub</title>
+    <meta charset="<?php bloginfo('charset'); ?>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <?php wp_head(); ?>
 </head>
-<body>
 
-<header>
-    <h1>KidHub</h1>
-</header>
+<body <?php body_class(); ?>>
+
+<?php wp_body_open(); ?>
+
+<?php get_template_part('template-parts/components/site-header'); ?>
