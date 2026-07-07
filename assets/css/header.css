@@ -1,0 +1,16 @@
+.header {
+  background: var(--color-dark);
+  color: var(--color-text-light);
+}
+
+.header__wrapper {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: var(--space-md);
+
+  min-height: 80px;
+}
