@@ -42,4 +42,7 @@
 
   /* Animation */
   --transition: 0.25s ease;
+
+  /* Shadow */
+  --shadow-button: 0 8px 24px rgba(79, 70, 229, 0.25);
 }

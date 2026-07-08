@@ -1,0 +1,30 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 14px 28px;
+
+  border: none;
+  border-radius: var(--radius-md);
+
+  background: var(--color-accent);
+  color: var(--color-text-light);
+
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+
+  transition: var(--transition);
+  box-shadow: var(--shadow-button);
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  opacity: 1;
+}
+
+.button:active {
+  transform: translateY(0);
+}
