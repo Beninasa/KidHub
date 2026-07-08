@@ -7,11 +7,19 @@
   --color-dark: #121212;
 
   /* Text */
+  --color-text-tittle: #696969;
   --color-text: #121212;
   --color-text-light: #ffffff;
 
   /* Border */
-  --color-border: #e5e5e5;
+  --color-border-categories: #916c4c;
+
+  /* Button color */
+  --color-button: #ffffff;
+  --color-button-border: #a9a9a9;
+  --color-button-text: #696969;
+  --color-button-hover: #c0c0c0;
+  --color-button-hover-text: #ffffff;
 
   /* Accent */
   --color-accent: #4f46e5;

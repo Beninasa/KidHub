@@ -10,8 +10,8 @@
 
 - [x] Создана тема WordPress
 - [x] Подключены header/footer
-- [ ] Создан Header
-- [ ] Создан Hero
+- [x] Создан Header
+- [x] Создан Hero
 - [ ] Создан каталог
 - [ ] Подключен WooCommerce
 - [ ] Подключен Marketplace

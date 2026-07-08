@@ -1,4 +1,5 @@
 .hero {
+  color: var(--color-text-tittle);
   padding: 80px 0;
   background: var(--color-background);
 }
@@ -18,4 +19,18 @@
   line-height: 1.6;
   margin-bottom: var(--space-lg);
   color: #555;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 56px 0;
+  }
+
+  .hero__title {
+    font-size: 38px;
+  }
+
+  .hero__description {
+    font-size: 18px;
+  }
 }

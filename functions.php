@@ -49,11 +49,18 @@ function kidhub_enqueue_styles()
     );
 
     wp_enqueue_style(
-        'kidhub-hero',
-        get_template_directory_uri() . '/assets/css/hero.css',
+        'kidhub-cards',
+        get_template_directory_uri() . '/assets/css/cards.css',
         ['kidhub-buttons'],
         '1.0'
     );
+
+   wp_enqueue_style(
+    'kidhub-hero',
+    get_template_directory_uri() . '/assets/css/hero.css',
+    ['kidhub-cards'],
+    '1.0'
+);
 }
 
 add_action('wp_enqueue_scripts', 'kidhub_enqueue_styles');

@@ -5,11 +5,11 @@
 
   padding: 14px 28px;
 
-  border: none;
-  border-radius: var(--radius-md);
+  border: 1px solid var(--color-button-border);
+  border-radius: 30px;
 
-  background: var(--color-accent);
-  color: var(--color-text-light);
+  background: var(--color-button);
+  color: var(--color-button-text);
 
   font-size: 16px;
   font-weight: 600;
@@ -17,12 +17,13 @@
   cursor: pointer;
 
   transition: var(--transition);
-  box-shadow: var(--shadow-button);
 }
 
 .button:hover {
-  transform: translateY(-1px);
+  transform: translateY(-3px);
   opacity: 1;
+  color: var(--color-button-hover-text);
+  background: var(--color-button-hover);
 }
 
 .button:active {
