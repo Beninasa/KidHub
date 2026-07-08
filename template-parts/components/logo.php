@@ -1,5 +1,4 @@
 <a href="<?php echo esc_url(home_url('/')); ?>" class="logo">
-
-    KidHub
-
+    <span class="logo__icon">🧸</span>
+    <span class="logo__text">KidHub</span>
 </a>
