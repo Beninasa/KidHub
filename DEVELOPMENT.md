@@ -12,6 +12,6 @@
 - [x] Подключены header/footer
 - [x] Создан Header
 - [x] Создан Hero
-- [ ] Создан каталог
+- [x] Создан каталог
 - [ ] Подключен WooCommerce
 - [ ] Подключен Marketplace

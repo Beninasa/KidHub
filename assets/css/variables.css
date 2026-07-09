@@ -12,7 +12,8 @@
   --color-text-light: #ffffff;
 
   /* Border */
-  --color-border-categories: #916c4c;
+  --color-border-categories: #a9a9a9;
+  --color-border-products: #a9a9a9;
 
   /* Button color */
   --color-button: #ffffff;
@@ -46,7 +47,7 @@
   /* Border radius */
   --radius-sm: 8px;
   --radius-md: 12px;
-  --radius-lg: 20px;
+  --radius-lg: 18px;
 
   /* Animation */
   --transition: 0.25s ease;

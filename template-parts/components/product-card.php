@@ -1,8 +1,8 @@
 <article class="product-card">
 
-    <div class="product-card__image">
-        <span>Фото</span>
-    </div>
+    <a href="#" class="product-card__image">
+        <span>Фото товару</span>
+    </a>
 
     <div class="product-card__body">
 
@@ -13,14 +13,22 @@
         <?php endif; ?>
 
         <h3 class="product-card__title">
-            <?php echo esc_html($args['name']); ?>
+            <a href="#"><?php echo esc_html($args['name']); ?></a>
         </h3>
 
-        <p class="product-card__price">
-            <?php echo esc_html($args['price']); ?>
-        </p>
+        <div class="product-card__prices">
+            <span class="product-card__price">
+                <?php echo esc_html($args['price']); ?>
+            </span>
 
-        <a href="#" class="button product-card__button">Купити</a>
+            <?php if (!empty($args['old_price'])) : ?>
+                <span class="product-card__old-price">
+                    <?php echo esc_html($args['old_price']); ?>
+                </span>
+            <?php endif; ?>
+        </div>
+
+        <a href="#" class="button product-card__button">У кошик</a>
 
     </div>
 
