@@ -1,17 +1,24 @@
 <article class="product-card">
 
-    <a href="#" class="product-card__image">
-        <span>Фото товару</span>
-    </a>
+   <a href="#" class="product-card__image">
+    <img
+        src="<?php echo esc_url(
+            get_template_directory_uri() . '/assets/images/products/' . $args['image']
+        ); ?>"
+        alt="<?php echo esc_attr($args['name']); ?>"
+        class="product-card__img"
+    >
+</a>
 
     <div class="product-card__body">
 
-        <?php if (!empty($args['badge'])) : ?>
-            <span class="product-card__badge">
-                <?php echo esc_html($args['badge']); ?>
-            </span>
-        <?php endif; ?>
-
+        <div class="product-card__badge-slot">
+            <?php if (!empty($args['badge'])) : ?>
+        <span class="product-card__badge">
+            <?php echo esc_html($args['badge']); ?>
+        </span>
+             <?php endif; ?>
+        </div>
         <h3 class="product-card__title">
             <a href="#"><?php echo esc_html($args['name']); ?></a>
         </h3>
@@ -28,7 +35,7 @@
             <?php endif; ?>
         </div>
 
-        <a href="#" class="button product-card__button">У кошик</a>
+        <a href="#" class="button product-card__button">Купити</a>
 
     </div>
 

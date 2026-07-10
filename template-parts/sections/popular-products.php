@@ -10,14 +10,62 @@
 
             <?php
             $products = [
-    ['name' => 'Дитячий плед', 'price' => '799 грн', 'old_price' => '999 грн', 'badge' => 'Хіт'],
-    ['name' => 'М’яка іграшка', 'price' => '499 грн', 'old_price' => '649 грн', 'badge' => 'Акція'],
-    ['name' => 'Боді для малюка', 'price' => '349 грн', 'old_price' => '', 'badge' => 'Новинка'],
-    ['name' => 'Прорізувач', 'price' => '199 грн', 'old_price' => '', 'badge' => ''],
-    ['name' => 'Дитячі шкарпетки', 'price' => '149 грн', 'old_price' => '', 'badge' => ''],
-    ['name' => 'Коробка для речей', 'price' => '599 грн', 'old_price' => '749 грн', 'badge' => ''],
-    ['name' => 'Подарунковий набір', 'price' => '1299 грн', 'old_price' => '1599 грн', 'badge' => 'Хіт'],
-    ['name' => 'Розвиваюча іграшка', 'price' => '699 грн', 'old_price' => '', 'badge' => ''],
+    [
+        'name'      => 'Дитячий плед',
+        'price'     => '799 грн',
+        'old_price' => '999 грн',
+        'badge'     => 'Хіт',
+        'image'     => 'blanket.jpg',
+    ],
+    [
+        'name'      => 'М’яка іграшка',
+        'price'     => '499 грн',
+        'old_price' => '649 грн',
+        'badge'     => 'Акція',
+        'image'     => 'toy.jpg',
+    ],
+    [
+        'name'      => 'Боді для малюка',
+        'price'     => '349 грн',
+        'old_price' => '',
+        'badge'     => 'Новинка',
+        'image'     => 'bodysuit.jpg',
+    ],
+    [
+        'name'      => 'Прорізувач',
+        'price'     => '199 грн',
+        'old_price' => '',
+        'badge'     => '',
+        'image'     => 'teether.jpg',
+    ],
+    [
+        'name'      => 'Дитячі шкарпетки',
+        'price'     => '149 грн',
+        'old_price' => '',
+        'badge'     => '',
+        'image'     => 'socks.jpg',
+    ],
+    [
+        'name'      => 'Коробка для речей',
+        'price'     => '599 грн',
+        'old_price' => '749 грн',
+        'badge'     => '',
+        'image'     => 'storage-box.jpg',
+    ],
+    [
+        'name'      => 'Подарунковий набір',
+        'price'     => '1299 грн',
+        'old_price' => '1599 грн',
+        'badge'     => 'Хіт',
+        'image'     => 'gift-set.jpg',
+    ],
+    [
+        'name'      => 'Розвиваюча іграшка',
+        'price'     => '699 грн',
+        'old_price' => '',
+        'badge'     => '',
+        'image'     => 'educational-toy.jpg',
+    ],
 ];
 
             foreach ($products as $product) {
