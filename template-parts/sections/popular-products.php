@@ -16,6 +16,8 @@
         'old_price' => '999 грн',
         'badge'     => 'Хіт',
         'image'     => 'blanket.jpg',
+        'rating'    => '4.9',
+        'reviews'   => '124',
     ],
     [
         'name'      => 'М’яка іграшка',
@@ -23,6 +25,8 @@
         'old_price' => '649 грн',
         'badge'     => 'Акція',
         'image'     => 'toy.jpg',
+        'rating'    => '4.8',
+        'reviews'   => '86',
     ],
     [
         'name'      => 'Боді для малюка',
@@ -30,6 +34,8 @@
         'old_price' => '',
         'badge'     => 'Новинка',
         'image'     => 'bodysuit.jpg',
+        'rating'    => '4.7',
+        'reviews'   => '42',
     ],
     [
         'name'      => 'Прорізувач',
@@ -37,6 +43,8 @@
         'old_price' => '',
         'badge'     => '',
         'image'     => 'teether.jpg',
+        'rating'    => '4.9',
+        'reviews'   => '68',
     ],
     [
         'name'      => 'Дитячі шкарпетки',
@@ -44,6 +52,8 @@
         'old_price' => '',
         'badge'     => '',
         'image'     => 'socks.jpg',
+        'rating'    => '4.6',
+        'reviews'   => '31',
     ],
     [
         'name'      => 'Коробка для речей',
@@ -51,6 +61,8 @@
         'old_price' => '749 грн',
         'badge'     => '',
         'image'     => 'storage-box.jpg',
+        'rating'    => '4.8',
+        'reviews'   => '54',
     ],
     [
         'name'      => 'Подарунковий набір',
@@ -58,6 +70,8 @@
         'old_price' => '1599 грн',
         'badge'     => 'Хіт',
         'image'     => 'gift-set.jpg',
+        'rating'    => '5.0',
+        'reviews'   => '97',
     ],
     [
         'name'      => 'Розвиваюча іграшка',
@@ -65,6 +79,8 @@
         'old_price' => '',
         'badge'     => '',
         'image'     => 'educational-toy.jpg',
+        'rating'    => '4.7',
+        'reviews'   => '73',
     ],
 ];
 
