@@ -6,7 +6,7 @@
   padding: 14px 28px;
 
   border: 1px solid var(--color-button-border);
-  border-radius: 30px;
+  border-radius: var(--radius-round);
 
   background: var(--color-button);
   color: var(--color-button-text);
@@ -20,17 +20,16 @@
 }
 
 .button:hover {
-  transform: translateY(-3px);
-  opacity: 1;
-  color: var(--color-button-hover-text);
   background: var(--color-button-hover);
+  color: var(--color-button-hover-text);
+  transform: translateY(-3px);
 }
 
 .button:active {
   transform: translateY(0);
 }
 
-/*Promotion-button*/
+/* Promotion button */
 
 .button--light {
   background: var(--color-background);
@@ -41,5 +40,4 @@
 .button--light:hover {
   background: var(--color-button-hover);
   color: var(--color-button-hover-text);
-  opacity: 1;
 }

@@ -1,38 +1,43 @@
 :root {
-  /* Background */
+  /* Base colors */
+  --color-brand: #ba9e88;
   --color-background: #f5f5f5;
-  --color-header: #ba9e88;
-
-  /* Dark */
+  --color-surface: #ffffff;
   --color-dark: #121212;
 
   /* Text */
-  --color-text-tittle: #696969;
   --color-text: #121212;
   --color-text-light: #ffffff;
+  --color-text-secondary: #555555;
+  --color-text-muted: #696969;
+  --color-text-subtle: #777777;
 
   /* Border */
-  --color-border-categories: #a9a9a9;
-  --color-border-products: #a9a9a9;
+  --color-border: #a9a9a9;
 
-  /* Button color */
-  --color-button: #f5f5f5;
-  --color-button-border: #a9a9a9;
-  --color-button-text: #ba9e88;
+  /* Component colors */
+  --color-header: var(--color-brand);
+  --color-promotion: var(--color-brand);
+  --color-rating: #e6a700;
+
+  /* Buttons */
+  --color-button: var(--color-background);
+  --color-button-border: var(--color-border);
+  --color-button-text: var(--color-brand);
   --color-button-hover: #c0c0c0;
-  --color-button-hover-text: #f5f5f5;
+  --color-button-hover-text: var(--color-background);
 
-  /* Accent */
+  /* Status */
   --color-accent: #4f46e5;
-
-  /* Success */
   --color-success: #16a34a;
-
-  /* Error */
   --color-error: #dc2626;
 
-  /* Promotion */
-  --color-promotion: #ba9e88;
+  /* Footer */
+  --color-footer-background: var(--color-background);
+  --color-footer-text: var(--color-text-muted);
+  --color-footer-text-hover: var(--color-brand);
+  --color-footer-border: var(--color-brand);
+  --color-footer-divider: rgba(18, 18, 18, 0.1);
 
   /* Layout */
   --container-width: 1280px;
@@ -48,16 +53,13 @@
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 18px;
+  --radius-round: 999px;
 
   /* Animation */
   --transition: 0.25s ease;
 
-  /* Shadow */
+  /* Shadows */
+  --shadow-card: 0 14px 36px rgba(0, 0, 0, 0.08);
   --shadow-button: 0 8px 24px rgba(79, 70, 229, 0.25);
-
-  /*Footer*/
-  --color-footer-background: #f5f5f5;
-  --color-footer-text: #696969;
-  --color-footer-text-hover: #ba9e88;
-  --color-footer-border: #ba9e88;
+  --shadow-control: 0 4px 14px rgba(0, 0, 0, 0.1);
 }

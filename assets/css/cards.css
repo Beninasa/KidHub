@@ -1,5 +1,5 @@
 .categories {
-  padding: 64px 0;
+  padding: var(--space-xl) 0;
 }
 
 .section-heading {
@@ -7,13 +7,14 @@
 }
 
 .section-heading__title {
+  margin-bottom: var(--space-xs);
+
   font-size: 36px;
   line-height: 1.2;
-  margin-bottom: var(--space-xs);
 }
 
 .section-heading__text {
-  color: #555555;
+  color: var(--color-text-secondary);
   font-size: 18px;
 }
 
@@ -31,7 +32,7 @@
   padding: 28px;
 
   background: var(--color-surface);
-  border: 2px solid var(--color-border-categories);
+  border: 2px solid var(--color-border);
   border-radius: var(--radius-lg);
 
   color: var(--color-text);
@@ -42,7 +43,7 @@
 
 .category-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-card);
 }
 
 .category-card__icon {
@@ -50,7 +51,7 @@
 }
 
 .category-card__title {
-  color: var(--color-text-tittle);
+  color: var(--color-text-muted);
   font-size: 18px;
   font-weight: 600;
 }
@@ -71,10 +72,10 @@
   }
 }
 
-/* Popular Products */
+/* Popular products */
 
 .popular-products {
-  padding: 64px 0;
+  padding: var(--space-xl) 0;
 }
 
 .products-grid {
@@ -84,12 +85,14 @@
 }
 
 .product-card {
+  position: relative;
+
   display: flex;
   flex-direction: column;
   min-width: 0;
   min-height: 100%;
 
-  background: #ffffff;
+  background: var(--color-surface);
   border-radius: var(--radius-lg);
   overflow: hidden;
 
@@ -98,22 +101,23 @@
 
 .product-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-card);
 }
 
 .product-card__image {
   display: block;
   aspect-ratio: 1 / 1;
   overflow: hidden;
-  background: #ffffff;
+
+  background: var(--color-surface);
 }
 
 .product-card__img {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
 
+  object-fit: cover;
   transition: transform var(--transition);
 }
 
@@ -132,8 +136,13 @@
 .product-card__badge-slot {
   display: flex;
   align-items: flex-start;
+
   min-height: 28px;
   margin-bottom: var(--space-sm);
+}
+
+.product-card__badge-slot:empty {
+  display: none;
 }
 
 .product-card__badge {
@@ -143,8 +152,8 @@
 
   padding: 4px 10px;
 
-  border-radius: 999px;
   background: var(--color-promotion);
+  border-radius: var(--radius-round);
   color: var(--color-text-light);
 
   font-size: 13px;
@@ -179,16 +188,12 @@
 }
 
 .product-card__old-price {
-  color: #777777;
+  color: var(--color-text-subtle);
   text-decoration: line-through;
 }
 
 .product-card__button {
   width: 100%;
-}
-
-.product-card {
-  position: relative;
 }
 
 .product-card__favorite {
@@ -212,7 +217,7 @@
   color: var(--color-text);
   cursor: pointer;
 
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-control);
   transition: var(--transition);
 }
 
@@ -246,7 +251,7 @@
 }
 
 .product-card__star {
-  color: #e6a700;
+  color: var(--color-rating);
   font-size: 17px;
   line-height: 1;
 }
@@ -257,7 +262,7 @@
 }
 
 .product-card__reviews {
-  color: #777777;
+  color: var(--color-text-subtle);
 }
 
 @media (max-width: 900px) {
@@ -272,10 +277,10 @@
   }
 }
 
-/* Benefits Section */
+/* Benefits */
 
 .benefits {
-  padding: 64px 0;
+  padding: var(--space-xl) 0;
 }
 
 .benefits__grid {
@@ -295,7 +300,7 @@
 
 .benefit-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-card);
 }
 
 .benefit-card__icon {
@@ -313,7 +318,7 @@
 }
 
 .benefit-card__text {
-  color: #555555;
+  color: var(--color-text-secondary);
   font-size: 16px;
   line-height: 1.5;
 }

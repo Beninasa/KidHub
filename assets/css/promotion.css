@@ -1,5 +1,5 @@
 .promotion-banner {
-  padding: 64px 0;
+  padding: var(--space-xl) 0;
 }
 
 .promotion-banner__inner {
