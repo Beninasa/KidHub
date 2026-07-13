@@ -61,6 +61,14 @@ function kidhub_enqueue_styles()
     ['kidhub-cards'],
     '1.0'
 );
+
+    wp_enqueue_style(
+        'kidhub-promotion',
+        get_template_directory_uri() . '/assets/css/promotion.css',
+        ['kidhub-hero'],
+        '1.0'
+);
+
 }
 
 add_action('wp_enqueue_scripts', 'kidhub_enqueue_styles');

@@ -29,3 +29,17 @@
 .button:active {
   transform: translateY(0);
 }
+
+/*Promotion-button*/
+
+.button--light {
+  background: var(--color-text-light);
+  color: var(--color-promotion);
+  box-shadow: none;
+}
+
+.button--light:hover {
+  background: var(--color-background);
+  color: var(--color-button-text);
+  opacity: 1;
+}

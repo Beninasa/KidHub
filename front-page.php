@@ -10,4 +10,6 @@ get_template_part('template-parts/sections/popular-products');
 
 get_template_part('template-parts/sections/benefits');
 
+get_template_part('template-parts/sections/promotion-banner');
+
 get_footer();
