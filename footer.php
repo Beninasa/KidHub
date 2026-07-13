@@ -1,7 +1,6 @@
-<footer>
-    <p>© <?php echo date('Y'); ?> KidHub</p>
-</footer>
+<?php get_template_part('template-parts/layout/site-footer'); ?>
 
 <?php wp_footer(); ?>
+
 </body>
 </html>

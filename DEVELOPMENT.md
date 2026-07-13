@@ -6,12 +6,34 @@
 
 ---
 
-## Этапы
+# Sprint 1 — Главная
 
-- [x] Создана тема WordPress
-- [x] Подключены header/footer
-- [x] Создан Header
-- [x] Создан Hero
-- [x] Создан каталог
-- [ ] Подключен WooCommerce
-- [ ] Подключен Marketplace
+- [x] Header
+- [x] Hero
+- [x] Sidebar
+- [x] Categories
+- [x] Popular Products
+- [x] Benefits
+- [x] Promotion Banner
+- [ ] Footer
+
+---
+
+# Sprint 2 — Каталог
+
+- [ ] Catalog
+- [ ] Filters
+- [ ] Sorting
+- [ ] Pagination
+
+---
+
+# Финальная полировка
+
+- [ ] Hero Slider
+- [ ] Quick View
+- [ ] Discount Badge
+- [ ] Hover Effects
+- [ ] SVG Icons
+- [ ] Mobile Menu
+- [ ] Final UI Polish

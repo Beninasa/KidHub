@@ -33,13 +33,13 @@
 /*Promotion-button*/
 
 .button--light {
-  background: var(--color-text-light);
+  background: var(--color-background);
   color: var(--color-promotion);
   box-shadow: none;
 }
 
 .button--light:hover {
-  background: var(--color-background);
-  color: var(--color-button-text);
+  background: var(--color-button-hover);
+  color: var(--color-button-hover-text);
   opacity: 1;
 }
