@@ -2,19 +2,38 @@
 
     <div class="container">
 
-        <div class="hero__content">
+        <div class="hero__layout">
 
-            <h1 class="hero__title">
-                Все, що потрібно дитині — в одному місці.
-            </h1>
+            <?php
+            get_template_part(
+                'template-parts/components/category-sidebar'
+            );
+            ?>
 
-            <p class="hero__description">
-                Знаходьте товари для дітей швидко, зручно та за вигідними цінами.
-            </p>
+            <div class="hero__banner">
 
-            <a href="#" class="button">
-                Перейти до каталогу
-            </a>
+                <div class="hero__content">
+
+                    <span class="hero__label">
+                        Спеціальна пропозиція
+                    </span>
+
+                    <h1 class="hero__title">
+                        Все для дітей в<br>
+                        одному місці
+                    </h1>
+
+                    <p class="hero__description">
+                        Знижки до 40% на обрані товари для дітей.
+                    </p>
+
+                    <a href="#" class="button">
+                        Переглянути пропозиції
+                    </a>
+
+                </div>
+
+            </div>
 
         </div>
 
