@@ -15,7 +15,7 @@
 - [x] Popular Products
 - [x] Benefits
 - [x] Promotion Banner
-- [ ] Footer
+- [x] Footer
 
 ---
 
