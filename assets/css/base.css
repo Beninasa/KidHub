@@ -11,8 +11,10 @@ html {
 body {
   background: var(--color-background);
   color: var(--color-text);
-  font-family: Inter, Arial, sans-serif;
-  line-height: 1.5;
+  font-family: var(--font-primary);
+  font-size: var(--text-base);
+  font-weight: var(--font-regular);
+  line-height: var(--line-normal);
 }
 
 a {

@@ -39,6 +39,28 @@
   --color-footer-border: var(--color-brand);
   --color-footer-divider: rgba(18, 18, 18, 0.1);
 
+  /* Typography */
+  --font-primary: "Inter", sans-serif;
+
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-md: 18px;
+  --text-lg: 20px;
+  --text-xl: 24px;
+  --text-2xl: 32px;
+  --text-3xl: 40px;
+  --text-4xl: 52px;
+
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+
+  --line-tight: 1.2;
+  --line-normal: 1.5;
+  --line-relaxed: 1.7;
+
   /* Layout */
   --container-width: 1280px;
 

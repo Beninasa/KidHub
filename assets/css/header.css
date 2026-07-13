@@ -17,12 +17,12 @@
   gap: 0;
 
   color: var(--color-text-light);
-  font-size: 28px;
-  font-weight: 700;
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
 }
 
 .logo__icon {
-  font-size: 30px;
+  font-size: var(--text-2xl);
 }
 
 .navigation__list {
@@ -60,7 +60,8 @@
   border-radius: var(--radius-md);
   outline: none;
 
-  font-size: 15px;
+  font-family: var(--font-primary);
+  font-size: var(--text-sm);
   transition: var(--transition);
 }
 

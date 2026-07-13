@@ -24,14 +24,14 @@
   margin-bottom: var(--space-sm);
 
   color: var(--color-footer-text);
-  font-size: 28px;
-  font-weight: 700;
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
   text-decoration: none;
 }
 
 .site-footer__tagline {
   color: var(--color-footer-text);
-  line-height: 1.6;
+  line-height: var(--line-relaxed);
 }
 
 .site-footer__title {
@@ -65,10 +65,10 @@
 .site-footer__bottom {
   padding-top: var(--space-md);
 
-  border-top: 1px solid var(--color-footer-divider);
+  border-top: 2px solid var(--color-footer-divider);
 
   color: var(--color-footer-text);
-  font-size: 14px;
+  font-size: var(--text-sm);
 }
 
 @media (max-width: 900px) {

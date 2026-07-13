@@ -14,6 +14,13 @@ function kidhub_enqueue_styles()
     );
 
     wp_enqueue_style(
+        'kidhub-fonts',
+        get_template_directory_uri() . '/assets/css/fonts.css',
+        ['kidhub-variables'],
+        null
+    );
+
+    wp_enqueue_style(
         'kidhub-base',
         get_template_directory_uri() . '/assets/css/base.css',
         ['kidhub-variables'],

@@ -9,13 +9,13 @@
 .section-heading__title {
   margin-bottom: var(--space-xs);
 
-  font-size: 36px;
+  font-size: var(--text-2xl);
   line-height: 1.2;
 }
 
 .section-heading__text {
   color: var(--color-text-secondary);
-  font-size: 18px;
+  font-size: var(--text-md);
 }
 
 .categories__grid {
@@ -47,13 +47,13 @@
 }
 
 .category-card__icon {
-  font-size: 36px;
+  font-size: var(--text-2xl);
 }
 
 .category-card__title {
   color: var(--color-text-muted);
-  font-size: 18px;
-  font-weight: 600;
+  font-size: var(--text-md);
+  font-weight: var(--font-semibold);
 }
 
 @media (max-width: 900px) {
@@ -157,14 +157,14 @@
   color: var(--color-text-light);
 
   font-size: 13px;
-  font-weight: 600;
+  font-weight: var(--font-semibold);
   line-height: 1.2;
 }
 
 .product-card__title {
   margin-bottom: var(--space-sm);
 
-  font-size: 18px;
+  font-size: var(--text-md);
   line-height: 1.3;
 }
 
@@ -183,7 +183,7 @@
 }
 
 .product-card__price {
-  font-size: 20px;
+  font-size: var(--text-lg);
   font-weight: 700;
 }
 
@@ -247,7 +247,7 @@
   min-height: 24px;
   margin-bottom: var(--space-sm);
 
-  font-size: 14px;
+  font-size: var(--text-sm);
 }
 
 .product-card__star {
@@ -258,7 +258,7 @@
 
 .product-card__rating-value {
   color: var(--color-text);
-  font-weight: 600;
+  font-weight: var(--font-semibold);
 }
 
 .product-card__reviews {
@@ -313,14 +313,14 @@
 .benefit-card__title {
   margin-bottom: var(--space-xs);
 
-  font-size: 20px;
+  font-size: var(--text-lg);
   line-height: 1.3;
 }
 
 .benefit-card__text {
   color: var(--color-text-secondary);
-  font-size: 16px;
-  line-height: 1.5;
+  font-size: var(--text-base);
+  line-height: var(--line-normal);
 }
 
 @media (max-width: 900px) {
