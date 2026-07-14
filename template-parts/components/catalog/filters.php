@@ -1,12 +1,12 @@
 <div class="catalog-filters__header">
     <h2 class="catalog-filters__title">Фільтри</h2>
 
-    <button type="button" class="catalog-filters__reset">
-        Очистити
+    <button type="reset" class="catalog-filters__reset">
+    Очистити
     </button>
 </div>
 
-<form class="filters-form">
+<form class="filters-form" action="#" method="get">
 
     <fieldset class="filter-group">
         <legend class="filter-group__title">Категорія</legend>
@@ -95,5 +95,9 @@
             <span>6+ років</span>
         </label>
     </fieldset>
+
+    <button type="submit" class="button filters-form__submit">
+        Застосувати фільтри
+    </button>
 
 </form>

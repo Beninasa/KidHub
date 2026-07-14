@@ -32,18 +32,11 @@ get_header();
                 </p>
             </div>
 
-            <label class="catalog-sorting">
-                <span class="catalog-sorting__label">
-                    Сортування
-                </span>
-
-                <select class="catalog-sorting__select">
-                    <option>За популярністю</option>
-                    <option>Від дешевих до дорогих</option>
-                    <option>Від дорогих до дешевих</option>
-                    <option>Новинки</option>
-                </select>
-            </label>
+           <?php
+            get_template_part(
+                'template-parts/components/catalog/sorting'
+            );
+            ?>
 
         </header>
 
@@ -57,14 +50,23 @@ get_header();
                 ?>
             </aside>
 
-            <section class="catalog-products">
 
-                <div class="catalog-products__placeholder">
-                    Сітка товарів з’явиться на наступному етапі.
-                </div>
+            <div class="catalog-content">            
+                <section class="catalog-products">
 
-            </section>
+                    <?php
+                    get_template_part(
+                    'template-parts/components/catalog/products'
+                    );
+                    ?>
 
+                </section>
+                    <?php
+                    get_template_part(
+                        'template-parts/components/catalog/pagination'
+                    );
+                    ?>
+            </div>
         </div>
 
     </div>

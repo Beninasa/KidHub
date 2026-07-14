@@ -68,7 +68,7 @@
 
 .catalog-layout {
   display: grid;
-  grid-template-columns: 260px minmax(0, 1fr);
+  grid-template-columns: 280px minmax(0, 1fr);
   gap: var(--space-lg);
   align-items: start;
 }
@@ -78,6 +78,9 @@
 
   background: var(--color-surface);
   border-radius: var(--radius-lg);
+
+  position: sticky;
+  top: 24px;
 }
 
 .catalog-filters__title {
@@ -120,13 +123,17 @@
   background: transparent;
   border: none;
 
-  color: var(--color-promotion);
-  font: inherit;
+  color: rgba(145, 108, 76, 0.7);
+
   font-size: 14px;
+  font-weight: 500;
+
   cursor: pointer;
+  transition: var(--transition);
 }
 
 .catalog-filters__reset:hover {
+  color: var(--color-promotion);
   text-decoration: underline;
 }
 
@@ -135,17 +142,24 @@
   flex-direction: column;
 }
 
+.filters-form__submit {
+  width: 100%;
+  margin-top: var(--space-md);
+}
+
 .filter-group {
   margin: 0;
-  padding: var(--space-md) 0;
-
+  padding: 0 0 20px;
   border: none;
-  border-bottom: 2px var(--color-brand) solid;
+}
+
+.filter-group:not(:last-child) {
+  margin-bottom: 20px;
+  border-bottom: 2px solid var(--color-promotion);
 }
 
 .filter-group__title {
-  margin-bottom: var(--space-sm);
-
+  margin: 0 0 16px;
   font-size: 16px;
   font-weight: 700;
 }
@@ -158,6 +172,23 @@
   margin-bottom: 10px;
 
   cursor: pointer;
+  transition: var(--transition);
+}
+
+.filter-option:hover {
+  color: var(--color-promotion);
+}
+
+.filter-option:hover input {
+  transform: scale(1.05);
+}
+
+.filter-option span {
+  transition: var(--transition);
+}
+
+.filter-option:hover span {
+  color: var(--color-promotion);
 }
 
 .filter-option:last-child {
@@ -202,4 +233,54 @@
 .price-filter input:focus {
   border-color: var(--color-promotion);
   outline: none;
+}
+
+/* Products */
+
+.catalog-products {
+  min-width: 0;
+}
+
+/* Pagination */
+
+.catalog-content {
+  min-width: 0;
+}
+
+.catalog-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  margin-top: var(--space-lg);
+}
+
+.catalog-pagination__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 42px;
+  height: 42px;
+  padding: 0 12px;
+
+  background: var(--color-surface);
+  border-radius: var(--radius-sm);
+
+  color: var(--color-text);
+  text-decoration: none;
+
+  transition: var(--transition);
+}
+
+.catalog-pagination__link:hover {
+  background: var(--color-header);
+  color: var(--color-text-light);
+}
+
+.catalog-pagination__link--active {
+  background: var(--color-promotion);
+  color: var(--color-text-light);
+  pointer-events: none;
 }
