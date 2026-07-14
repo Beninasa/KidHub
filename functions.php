@@ -76,6 +76,13 @@ function kidhub_enqueue_styles()
         '1.0'
 );
 
+wp_enqueue_style(
+    'kidhub-catalog',
+    get_template_directory_uri() . '/assets/css/catalog.css',
+    ['kidhub-promotion'],
+    '1.0'
+);
+
 }
 
 add_action('wp_enqueue_scripts', 'kidhub_enqueue_styles');
