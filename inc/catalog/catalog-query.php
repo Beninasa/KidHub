@@ -8,6 +8,17 @@ $products = require get_template_directory()
 $sorting = isset($_GET['sorting'])
     ? sanitize_key(wp_unslash($_GET['sorting']))
     : 'popular';
+$allowed_sorting = [
+    'popular',
+    'price-asc',
+    'price-desc',
+    'rating',
+    'newest',
+];
+
+if (! in_array($sorting, $allowed_sorting, true)) {
+    $sorting = 'popular';
+}
 
 $price_min = isset($_GET['price_min'])
     ? max(0, (int) wp_unslash($_GET['price_min']))
@@ -109,7 +120,7 @@ $total_pages = max(
 );
 
 $current_page = isset($_GET['catalog_page'])
-    ? max(1, (int) wp_unslash($_GET['catalog_page']))
+    ? max(1, absint(wp_unslash($_GET['catalog_page'])))
     : 1;
 
 $current_page = min($current_page, $total_pages);

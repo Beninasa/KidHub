@@ -41,7 +41,11 @@ $selected_ages = isset($_GET['age'])
     </a>
 </div>
 
-<form class="filters-form" action="#" method="get">
+<form
+    class="filters-form"
+    action="<?php echo esc_url(get_permalink()); ?>"
+    method="get"
+>
     <input
         type="hidden"
         name="sorting"

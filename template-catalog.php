@@ -40,7 +40,7 @@ $catalog = require get_template_directory()
                 </p>
             </div>
 
-           <form class="catalog-sorting-form" method="get">
+            <form class="catalog-sorting-form" method="get">
 
                 <?php foreach ((array) ($_GET['category'] ?? []) as $category) : ?>
                     <input
@@ -94,20 +94,20 @@ $catalog = require get_template_directory()
 
         <div class="catalog-layout">
 
-           <aside class="catalog-filters">
+            <aside class="catalog-filters">
                 <?php
-                 get_template_part(
-                     'template-parts/components/catalog/filters'
+                get_template_part(
+                    'template-parts/components/catalog/filters'
                 );
                 ?>
             </aside>
 
 
-            <div class="catalog-content">            
+            <div class="catalog-content">
                 <section class="catalog-products">
 
                     <?php
-                    get_template_part(
+                   get_template_part(
                         'template-parts/components/catalog/products',
                         null,
                         [
@@ -118,7 +118,7 @@ $catalog = require get_template_directory()
 
                 </section>
                     <?php
-                    get_template_part(
+                   get_template_part(
                         'template-parts/components/catalog/pagination',
                         null,
                         [
