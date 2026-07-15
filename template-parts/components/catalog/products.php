@@ -1,46 +1,31 @@
 <?php
 
-$products = require get_template_directory() . '/inc/catalog/products-data.php';
-$sorting = isset($_GET['sorting'])
-    ? sanitize_key(wp_unslash($_GET['sorting']))
-    : 'popular';
-switch ($sorting) {
+$products = $args['products'] ?? [];
 
-    case 'price-asc':
-        usort($products, fn($a, $b) => $a['price'] <=> $b['price']);
-        break;
-
-    case 'price-desc':
-        usort($products, fn($a, $b) => $b['price'] <=> $a['price']);
-        break;
-
-    case 'rating':
-        usort($products, fn($a, $b) => $b['rating'] <=> $a['rating']);
-        break;
-
-    case 'newest':
-        usort($products, fn($a, $b) => strcmp($b['created_at'], $a['created_at']));
-        break;
-
-    default:
-        usort($products, fn($a, $b) => $b['popularity'] <=> $a['popularity']);
-        break;
-}
 ?>
 
+<?php if (empty($products)) : ?>
 
-<div class="products-grid">
+    <p class="catalog-products__empty">
+        Товарів за вибраними параметрами не знайдено.
+    </p>
 
-    <?php foreach ($products as $product) : ?>
+<?php else : ?>
 
-        <?php
-        get_template_part(
-            'template-parts/components/product-card',
-            null,
-            $product
-        );
-        ?>
+    <div class="products-grid">
 
-    <?php endforeach; ?>
+        <?php foreach ($products as $product) : ?>
 
-</div>
+            <?php
+            get_template_part(
+                'template-parts/components/product-card',
+                null,
+                $product
+            );
+            ?>
+
+        <?php endforeach; ?>
+
+    </div>
+
+<?php endif; ?>
