@@ -32,11 +32,15 @@ get_header();
                 </p>
             </div>
 
-           <?php
-            get_template_part(
-                'template-parts/components/catalog/sorting'
-            );
-            ?>
+           <form class="catalog-sorting-form" method="get">
+
+                <?php
+                get_template_part(
+                    'template-parts/components/catalog/sorting'
+                );
+                ?>
+
+            </form>
 
         </header>
 

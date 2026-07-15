@@ -75,12 +75,12 @@ $image_url = get_template_directory_uri()
         <div class="product-card__prices">
 
             <span class="product-card__price">
-                <?php echo esc_html($price); ?>
+                <?php echo esc_html($price) . ' грн'; ?>
             </span>
 
             <?php if (!empty($old_price)) : ?>
                 <span class="product-card__old-price">
-                    <?php echo esc_html($old_price); ?>
+                    <?php echo esc_html($old_price) . ' грн'; ?>
                 </span>
             <?php endif; ?>
 
