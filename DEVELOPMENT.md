@@ -21,10 +21,10 @@
 
 # Sprint 2 — Каталог
 
-- [ ] Catalog
-- [ ] Filters
-- [ ] Sorting
-- [ ] Pagination
+- [x] Catalog
+- [x] Filters
+- [x] Sorting
+- [x] Pagination
 
 ---
 
