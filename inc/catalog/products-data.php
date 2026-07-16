@@ -5,6 +5,7 @@ defined('ABSPATH') || exit;
 return [
     [
         'id'         => 1,
+        'sku'        => 'KH-PLD-001',
         'name'       => 'Дитячий плед',
         'price'      => 799,
         'old_price'  => 999,

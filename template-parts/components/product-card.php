@@ -7,10 +7,21 @@ $badge     = $args['badge'] ?? '';
 $image     = $args['image'] ?? '';
 $rating    = $args['rating'] ?? '0';
 $reviews   = $args['reviews'] ?? '0';
+$sku       = $args['sku'] ?? '';
 
 $image_url = get_template_directory_uri()
     . '/assets/images/products/'
     . $image;
+
+$product_url = '#';
+
+if ($sku && function_exists('wc_get_product_id_by_sku')) {
+    $product_id = wc_get_product_id_by_sku($sku);
+
+    if ($product_id) {
+        $product_url = get_permalink($product_id);
+    }
+}
 
 ?>
 
@@ -33,7 +44,10 @@ $image_url = get_template_directory_uri()
         </svg>
     </button>
 
-    <a href="#" class="product-card__image">
+    <a
+        href="<?php echo esc_url($product_url); ?>"
+        class="product-card__image"
+    >
         <img
             src="<?php echo esc_url($image_url); ?>"
             alt="<?php echo esc_attr($name); ?>"
@@ -44,7 +58,7 @@ $image_url = get_template_directory_uri()
     <div class="product-card__body">
 
         <div class="product-card__badge-slot">
-            <?php if (!empty($badge)) : ?>
+            <?php if (! empty($badge)) : ?>
                 <span class="product-card__badge">
                     <?php echo esc_html($badge); ?>
                 </span>
@@ -52,7 +66,7 @@ $image_url = get_template_directory_uri()
         </div>
 
         <h3 class="product-card__title">
-            <a href="#">
+            <a href="<?php echo esc_url($product_url); ?>">
                 <?php echo esc_html($name); ?>
             </a>
         </h3>
@@ -78,7 +92,7 @@ $image_url = get_template_directory_uri()
                 <?php echo esc_html($price) . ' грн'; ?>
             </span>
 
-            <?php if (!empty($old_price)) : ?>
+            <?php if (! empty($old_price)) : ?>
                 <span class="product-card__old-price">
                     <?php echo esc_html($old_price) . ' грн'; ?>
                 </span>
@@ -86,7 +100,10 @@ $image_url = get_template_directory_uri()
 
         </div>
 
-        <a href="#" class="button product-card__button">
+        <a
+            href="<?php echo esc_url($product_url); ?>"
+            class="button product-card__button"
+        >
             Купити
         </a>
 
