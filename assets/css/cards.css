@@ -173,6 +173,20 @@
   text-decoration: none;
 }
 
+.product-card--linked .product-card__title a::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.product-card__button {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
 .product-card__prices {
   display: flex;
   align-items: center;
@@ -190,10 +204,6 @@
 .product-card__old-price {
   color: var(--color-text-subtle);
   text-decoration: line-through;
-}
-
-.product-card__button {
-  width: 100%;
 }
 
 .product-card__favorite {

@@ -23,9 +23,15 @@ if ($sku && function_exists('wc_get_product_id_by_sku')) {
     }
 }
 
+$has_product_link = $product_url !== '#';
+
 ?>
 
-<article class="product-card">
+<article
+    class="product-card<?php echo $has_product_link
+        ? ' product-card--linked'
+        : ''; ?>"
+>
 
     <button
         type="button"
