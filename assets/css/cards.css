@@ -181,10 +181,47 @@
   z-index: 1;
 }
 
-.product-card__button {
+.product-card__button,
+.woocommerce .product-card a.product-card__button {
   position: relative;
   z-index: 2;
   width: 100%;
+}
+
+/* Restore KidHub button styles inside WooCommerce */
+
+.woocommerce .product-card a.product-card__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 44px;
+  padding: 10px 18px;
+
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-round);
+  box-shadow: none;
+
+  color: var(--color-header);
+  font-weight: var(--font-semibold);
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+
+  transition: var(--transition);
+}
+
+.product-card a.product-card__button:hover,
+.woocommerce .product-card a.product-card__button:hover {
+  background: var(--color-header);
+  border-color: var(--color-header);
+  color: var(--color-text-light);
+}
+
+.woocommerce .product-card a.product-card__button:focus-visible {
+  outline: 2px solid var(--color-header);
+  outline-offset: 2px;
 }
 
 .product-card__prices {
