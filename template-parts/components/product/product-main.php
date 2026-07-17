@@ -12,6 +12,12 @@ if (! $product instanceof WC_Product) {
     return;
 }
 
+remove_action(
+    'woocommerce_single_product_summary',
+    'woocommerce_template_single_meta',
+    40
+);
+
 do_action('woocommerce_before_single_product');
 
 if (post_password_required()) {
@@ -21,7 +27,7 @@ if (post_password_required()) {
 }
 ?>
 
-<article
+<div
     id="product-<?php the_ID(); ?>"
     <?php wc_product_class('product-detail', $product); ?>
 >
@@ -36,6 +42,13 @@ if (post_password_required()) {
         <div class="product-detail__summary summary entry-summary">
             <?php
             do_action('woocommerce_single_product_summary');
+            get_template_part(
+                'template-parts/components/product/product-meta',
+                null,
+                [
+                    'product' => $product,
+                ]
+            );
             ?>
         </div>
 
@@ -46,7 +59,7 @@ if (post_password_required()) {
         do_action('woocommerce_after_single_product_summary');
         ?>
     </div>
-</article>
+</div>
 
 <?php
 do_action('woocommerce_after_single_product');

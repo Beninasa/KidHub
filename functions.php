@@ -7,6 +7,16 @@ function kidhub_setup()
 {
     add_theme_support('post-thumbnails');
     add_theme_support('woocommerce');
+
+    add_theme_support('wc-product-gallery-zoom');
+    add_theme_support('wc-product-gallery-lightbox');
+    add_theme_support('wc-product-gallery-slider');
+}
+
+add_action('after_setup_theme', 'kidhub_setup');
+{
+    add_theme_support('post-thumbnails');
+    add_theme_support('woocommerce');
 }
 
 add_action('after_setup_theme', 'kidhub_setup');
@@ -89,7 +99,14 @@ wp_enqueue_style(
     ['kidhub-promotion'],
     '1.0'
 );
-
+if (function_exists('is_product') && is_product()) {
+    wp_enqueue_style(
+        'kidhub-product',
+        get_template_directory_uri() . '/assets/css/product.css',
+        ['kidhub-catalog'],
+        '1.0'
+    );
+}
 }
 
 add_action('wp_enqueue_scripts', 'kidhub_enqueue_styles');
