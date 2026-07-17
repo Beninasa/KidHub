@@ -151,3 +151,67 @@ add_filter(
     'woocommerce_product_additional_information_heading',
     '__return_false'
 );
+
+/**
+ * Заголовок блока похожих товаров.
+ */
+function kidhub_related_products_heading()
+{
+    return __('Подібні товари', 'kidhub');
+}
+
+add_filter(
+    'woocommerce_product_related_products_heading',
+    'kidhub_related_products_heading'
+);
+
+function kidhub_replace_related_products()
+{
+    if (! function_exists('WC')) {
+        return;
+    }
+
+    remove_action(
+        'woocommerce_after_single_product_summary',
+        'woocommerce_output_related_products',
+        20
+    );
+
+    add_action(
+        'woocommerce_after_single_product_summary',
+        'kidhub_render_related_products',
+        20
+    );
+}
+add_action('wp', 'kidhub_replace_related_products');
+
+
+function kidhub_render_related_products()
+{
+    global $product;
+
+    if (
+        ! is_product()
+        || ! $product instanceof WC_Product
+    ) {
+        return;
+    }
+
+    $related_ids = wc_get_related_products(
+        $product->get_id(),
+        4,
+        [$product->get_id()]
+    );
+
+    if (empty($related_ids)) {
+        return;
+    }
+
+    get_template_part(
+        'template-parts/components/product/product-related',
+        null,
+        [
+            'product_ids' => $related_ids,
+        ]
+    );
+}

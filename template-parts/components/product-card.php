@@ -1,21 +1,30 @@
 <?php
 
-$name      = $args['name'] ?? '';
-$price     = $args['price'] ?? '';
-$old_price = $args['old_price'] ?? '';
-$badge     = $args['badge'] ?? '';
-$image     = $args['image'] ?? '';
-$rating    = $args['rating'] ?? '0';
-$reviews   = $args['reviews'] ?? '0';
-$sku       = $args['sku'] ?? '';
+$name         = $args['name'] ?? '';
+$price        = $args['price'] ?? '';
+$price_html   = $args['price_html'] ?? '';
+$old_price    = $args['old_price'] ?? '';
+$badge        = $args['badge'] ?? '';
+$image        = $args['image'] ?? '';
+$image_html   = $args['image_html'] ?? '';
+$rating       = $args['rating'] ?? '';
+$reviews      = $args['reviews'] ?? '0';
+$sku          = $args['sku'] ?? '';
+$product_url  = $args['product_url'] ?? '#';
 
-$image_url = get_template_directory_uri()
-    . '/assets/images/products/'
-    . $image;
+$image_url = '';
 
-$product_url = '#';
+if (! $image_html && $image) {
+    $image_url = get_template_directory_uri()
+        . '/assets/images/products/'
+        . $image;
+}
 
-if ($sku && function_exists('wc_get_product_id_by_sku')) {
+if (
+    $product_url === '#' &&
+    $sku &&
+    function_exists('wc_get_product_id_by_sku')
+) {
     $product_id = wc_get_product_id_by_sku($sku);
 
     if ($product_id) {
@@ -24,6 +33,7 @@ if ($sku && function_exists('wc_get_product_id_by_sku')) {
 }
 
 $has_product_link = $product_url !== '#';
+$has_rating       = $rating !== '' && (float) $rating > 0;
 
 ?>
 
@@ -54,17 +64,25 @@ $has_product_link = $product_url !== '#';
         href="<?php echo esc_url($product_url); ?>"
         class="product-card__image"
     >
-        <img
-            src="<?php echo esc_url($image_url); ?>"
-            alt="<?php echo esc_attr($name); ?>"
-            class="product-card__img"
-        >
+        <?php if ($image_html) : ?>
+
+            <?php echo wp_kses_post($image_html); ?>
+
+        <?php elseif ($image_url) : ?>
+
+            <img
+                src="<?php echo esc_url($image_url); ?>"
+                alt="<?php echo esc_attr($name); ?>"
+                class="product-card__img"
+            >
+
+        <?php endif; ?>
     </a>
 
     <div class="product-card__body">
 
         <div class="product-card__badge-slot">
-            <?php if (! empty($badge)) : ?>
+            <?php if ($badge) : ?>
                 <span class="product-card__badge">
                     <?php echo esc_html($badge); ?>
                 </span>
@@ -78,30 +96,50 @@ $has_product_link = $product_url !== '#';
         </h3>
 
         <div
-            class="product-card__rating"
-            aria-label="Рейтинг <?php echo esc_attr($rating); ?> з 5"
+            class="product-card__rating<?php echo $has_rating
+                ? ''
+                : ' product-card__rating--empty'; ?>"
+            <?php if ($has_rating) : ?>
+                aria-label="Рейтинг <?php echo esc_attr($rating); ?> з 5"
+            <?php else : ?>
+                aria-hidden="true"
+            <?php endif; ?>
         >
-            <span class="product-card__star">★</span>
+            <?php if ($has_rating) : ?>
 
-            <span class="product-card__rating-value">
-                <?php echo esc_html($rating); ?>
-            </span>
+                <span class="product-card__star">★</span>
 
-            <span class="product-card__reviews">
-                (<?php echo esc_html($reviews); ?>)
-            </span>
+                <span class="product-card__rating-value">
+                    <?php echo esc_html($rating); ?>
+                </span>
+
+                <span class="product-card__reviews">
+                    (<?php echo esc_html($reviews); ?>)
+                </span>
+
+            <?php endif; ?>
         </div>
 
         <div class="product-card__prices">
 
-            <span class="product-card__price">
-                <?php echo esc_html($price) . ' грн'; ?>
-            </span>
+            <?php if ($price_html) : ?>
 
-            <?php if (! empty($old_price)) : ?>
-                <span class="product-card__old-price">
-                    <?php echo esc_html($old_price) . ' грн'; ?>
+                <span class="product-card__price">
+                    <?php echo wp_kses_post($price_html); ?>
                 </span>
+
+            <?php else : ?>
+
+                <span class="product-card__price">
+                    <?php echo esc_html($price) . ' грн'; ?>
+                </span>
+
+                <?php if ($old_price) : ?>
+                    <span class="product-card__old-price">
+                        <?php echo esc_html($old_price) . ' грн'; ?>
+                    </span>
+                <?php endif; ?>
+
             <?php endif; ?>
 
         </div>
