@@ -110,3 +110,44 @@ if (function_exists('is_product') && is_product()) {
 }
 
 add_action('wp_enqueue_scripts', 'kidhub_enqueue_styles');
+
+/**
+ * Настройка вкладок страницы товара.
+ */
+function kidhub_customize_product_tabs($tabs)
+{
+    if (isset($tabs['additional_information'])) {
+        $tabs['additional_information']['title'] = __(
+            'Характеристики',
+            'kidhub'
+        );
+    }
+
+    $tabs['delivery_payment'] = [
+        'title'    => __('Доставка й оплата', 'kidhub'),
+        'priority' => 25,
+        'callback' => 'kidhub_render_delivery_payment_tab',
+    ];
+
+    return $tabs;
+}
+
+add_filter(
+    'woocommerce_product_tabs',
+    'kidhub_customize_product_tabs'
+);
+
+/**
+ * Содержимое вкладки доставки и оплаты.
+ */
+function kidhub_render_delivery_payment_tab()
+{
+    get_template_part(
+        'template-parts/components/product/product-delivery'
+    );
+}
+
+add_filter(
+    'woocommerce_product_additional_information_heading',
+    '__return_false'
+);
