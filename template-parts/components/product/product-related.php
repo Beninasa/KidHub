@@ -41,7 +41,7 @@ $heading = apply_filters(
             get_template_part(
                 'template-parts/components/product-card',
                 null,
-                [
+                [   'product_id' => $related_product->get_id(),
                     'name'        => $related_product->get_name(),
                     'price_html'  => $related_product->get_price_html(),
                     'image_html'  => $related_product->get_image(

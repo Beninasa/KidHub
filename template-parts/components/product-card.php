@@ -11,6 +11,9 @@ $rating       = $args['rating'] ?? '';
 $reviews      = $args['reviews'] ?? '0';
 $sku          = $args['sku'] ?? '';
 $product_url  = $args['product_url'] ?? '#';
+$product_id = isset($args['product_id'])
+    ? absint($args['product_id'])
+    : 0;
 
 $image_url = '';
 
@@ -20,20 +23,52 @@ if (! $image_html && $image) {
         . $image;
 }
 
+$card_product = null;
+
+if ($product_id && function_exists('wc_get_product')) {
+    $card_product = wc_get_product($product_id);
+}
+
 if (
-    $product_url === '#' &&
+    ! $card_product instanceof WC_Product &&
     $sku &&
     function_exists('wc_get_product_id_by_sku')
 ) {
     $product_id = wc_get_product_id_by_sku($sku);
 
     if ($product_id) {
-        $product_url = get_permalink($product_id);
+        $card_product = wc_get_product($product_id);
     }
+}
+
+if ($card_product instanceof WC_Product) {
+    $product_url = $card_product->get_permalink();
 }
 
 $has_product_link = $product_url !== '#';
 $has_rating       = $rating !== '' && (float) $rating > 0;
+
+$can_add_to_cart = (
+    $card_product instanceof WC_Product &&
+    $card_product->is_type('simple') &&
+    $card_product->is_purchasable() &&
+    $card_product->is_in_stock()
+);
+
+$button_url = $can_add_to_cart
+    ? $card_product->add_to_cart_url()
+    : $product_url;
+
+$button_classes = 'button product-card__button';
+
+if ($can_add_to_cart) {
+    $button_classes .=
+        ' product_type_simple add_to_cart_button ajax_add_to_cart';
+}
+
+$product_id = isset($args['product_id'])
+    ? absint($args['product_id'])
+    : 0;
 
 ?>
 
@@ -144,12 +179,26 @@ $has_rating       = $rating !== '' && (float) $rating > 0;
 
         </div>
 
-        <a
-            href="<?php echo esc_url($product_url); ?>"
-            class="button product-card__button"
-        >
-            Купити
-        </a>
+            <a
+                href="<?php echo esc_url($button_url); ?>"
+                class="<?php echo esc_attr($button_classes); ?>"
+                <?php if ($can_add_to_cart) : ?>
+                    data-quantity="1"
+                    data-product_id="<?php echo esc_attr($product_id); ?>"
+                    data-product_sku="<?php echo esc_attr(
+                        $card_product->get_sku()
+                    ); ?>"
+                    aria-label="<?php echo esc_attr(
+                        sprintf(
+                            __('Додати «%s» до кошика', 'kidhub'),
+                            $card_product->get_name()
+                        )
+                    ); ?>"
+                    rel="nofollow"
+                <?php endif; ?>
+            >
+                <?php esc_html_e('Купити', 'kidhub'); ?>
+            </a>
 
     </div>
 
