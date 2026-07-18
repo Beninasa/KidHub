@@ -107,6 +107,16 @@ if (function_exists('is_product') && is_product()) {
         '1.0'
     );
 }
+
+if (function_exists('is_cart') && is_cart()) {
+    wp_enqueue_style(
+        'kidhub-cart',
+        get_template_directory_uri() . '/assets/css/cart.css',
+        ['kidhub-catalog'],
+        '1.0'
+    );
+}
+
 }
 
 add_action('wp_enqueue_scripts', 'kidhub_enqueue_styles');
