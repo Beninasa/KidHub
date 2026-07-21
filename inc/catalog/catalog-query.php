@@ -302,10 +302,6 @@ $current_page   = min($requested_page, $total_pages);
  * показываем последнюю доступную.
  */
 
-if ($current_page !== $requested_page) {
-    $product_query = $run_product_query($current_page);
-}
-
 $visible_products = [];
 
 foreach ($product_query->posts as $product_id) {
@@ -351,6 +347,5 @@ return [
     'total_pages'    => $total_pages,
     'current_page'   => $current_page,
     'query_args'     => $query_args,
-    // данные каталога
 ];
 
