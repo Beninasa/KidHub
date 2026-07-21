@@ -1,5 +1,7 @@
 <?php
 
+defined('ABSPATH') || exit;
+
 $price_min = isset($_GET['price_min'])
     ? max(0, (int) wp_unslash($_GET['price_min']))
     : '';
@@ -10,10 +12,11 @@ $price_max = isset($_GET['price_max'])
 
 $selected_categories = isset($_GET['category'])
     ? array_map(
-        'sanitize_key',
+        'sanitize_title',
         (array) wp_unslash($_GET['category'])
     )
     : [];
+
 $selected_brands = isset($_GET['brand'])
     ? array_map(
         'sanitize_key',
@@ -27,17 +30,60 @@ $selected_ages = isset($_GET['age'])
         (array) wp_unslash($_GET['age'])
     )
     : [];
+
+$default_category_id = (int) get_option('default_product_cat');
+
+$product_categories = get_terms([
+    'taxonomy'   => 'product_cat',
+    'hide_empty' => true,
+    'exclude'    => $default_category_id
+        ? [$default_category_id]
+        : [],
+    'orderby'    => 'name',
+    'order'      => 'ASC',
+]);
+
+$brand_terms = taxonomy_exists('pa_brand')
+    ? get_terms([
+        'taxonomy'   => 'pa_brand',
+        'hide_empty' => true,
+        'orderby'    => 'name',
+        'order'      => 'ASC',
+    ])
+    : [];
+
+$age_terms = taxonomy_exists('pa_age')
+    ? get_terms([
+        'taxonomy'   => 'pa_age',
+        'hide_empty' => true,
+        'orderby'    => 'name',
+        'order'      => 'ASC',
+    ])
+    : [];
+
+if (is_wp_error($product_categories)) {
+    $product_categories = [];
+}
+
+if (is_wp_error($brand_terms)) {
+    $brand_terms = [];
+}
+
+if (is_wp_error($age_terms)) {
+    $age_terms = [];
+}
 ?>
 
-
 <div class="catalog-filters__header">
-    <h2 class="catalog-filters__title">Фільтри</h2>
+    <h2 class="catalog-filters__title">
+        <?php esc_html_e('Фільтри', 'kidhub'); ?>
+    </h2>
 
     <a
-    href="<?php echo esc_url(get_permalink()); ?>"
-    class="catalog-filters__reset"
->
-    Очистити
+        href="<?php echo esc_url(get_permalink()); ?>"
+        class="catalog-filters__reset"
+    >
+        <?php esc_html_e('Очистити', 'kidhub'); ?>
     </a>
 </div>
 
@@ -55,56 +101,45 @@ $selected_ages = isset($_GET['age'])
                 : 'popular'
         ); ?>"
     >
-    <fieldset class="filter-group">
-        <legend class="filter-group__title">Категорія</legend>
 
-        <label class="filter-option">
-            <input
-                type="checkbox"
-                name="category[]"
-                value="toys"
-                <?php checked(in_array('toys', $selected_categories, true)); ?>
-            >
-            <span>Іграшки</span>
-        </label>
+    <?php if (! empty($product_categories)) : ?>
+        <fieldset class="filter-group">
+            <legend class="filter-group__title">
+                <?php esc_html_e('Категорія', 'kidhub'); ?>
+            </legend>
 
-        <label class="filter-option">
-            <input
-                type="checkbox"
-                name="category[]"
-                value="clothes"
-                <?php checked(in_array('clothes', $selected_categories, true)); ?>
-            >
-            <span>Одяг</span>
-        </label>
+            <?php foreach ($product_categories as $category) : ?>
+                <label class="filter-option">
+                    <input
+                        type="checkbox"
+                        name="category[]"
+                        value="<?php echo esc_attr($category->slug); ?>"
+                        <?php checked(
+                            in_array(
+                                $category->slug,
+                                $selected_categories,
+                                true
+                            )
+                        ); ?>
+                    >
 
-        <label class="filter-option">
-            <input
-                type="checkbox"
-                name="category[]"
-                value="newborn"
-                <?php checked(in_array('newborn', $selected_categories, true)); ?>
-            >
-            <span>Для новонароджених</span>
-        </label>
-
-        <label class="filter-option">
-            <input
-                type="checkbox"
-                name="category[]"
-                value="strollers"
-                <?php checked(in_array('strollers', $selected_categories, true)); ?>
-            >
-            <span>Коляски</span>
-        </label>
-    </fieldset>
+                    <span>
+                        <?php echo esc_html($category->name); ?>
+                    </span>
+                </label>
+            <?php endforeach; ?>
+        </fieldset>
+    <?php endif; ?>
 
     <fieldset class="filter-group">
-        <legend class="filter-group__title">Ціна</legend>
+        <legend class="filter-group__title">
+            <?php esc_html_e('Ціна', 'kidhub'); ?>
+        </legend>
 
         <div class="price-filter">
             <label>
-                <span>Від</span>
+                <span><?php esc_html_e('Від', 'kidhub'); ?></span>
+
                 <input
                     type="number"
                     name="price_min"
@@ -115,96 +150,74 @@ $selected_ages = isset($_GET['age'])
             </label>
 
             <label>
-                <span>До</span>
+                <span><?php esc_html_e('До', 'kidhub'); ?></span>
+
                 <input
                     type="number"
                     name="price_max"
                     min="0"
                     placeholder="5000"
-                    value="<?php echo esc_attr($price_max);?>"
+                    value="<?php echo esc_attr($price_max); ?>"
                 >
             </label>
         </div>
     </fieldset>
 
-    <fieldset class="filter-group">
-        <legend class="filter-group__title">Бренд</legend>
+    <?php if (! empty($brand_terms)) : ?>
+        <fieldset class="filter-group">
+            <legend class="filter-group__title">
+                <?php esc_html_e('Бренд', 'kidhub'); ?>
+            </legend>
 
-        <label class="filter-option">
-            <input
-                type="checkbox"
-                name="brand[]"
-                value="chicco"
-                <?php checked(in_array('chicco', $selected_brands, true)); ?>
-            >
-            <span>Chicco</span>
-        </label>
+            <?php foreach ($brand_terms as $brand) : ?>
+                <label class="filter-option">
+                    <input
+                        type="checkbox"
+                        name="brand[]"
+                        value="<?php echo esc_attr($brand->slug); ?>"
+                        <?php checked(
+                            in_array(
+                                $brand->slug,
+                                $selected_brands,
+                                true
+                            )
+                        ); ?>
+                    >
 
-        <label class="filter-option">
-            <input
-                type="checkbox"
-                name="brand[]"
-                value="lego"
-                <?php checked(in_array('lego', $selected_brands, true)); ?>
-            >
-            <span>LEGO</span>
-        </label>
+                    <span><?php echo esc_html($brand->name); ?></span>
+                </label>
+            <?php endforeach; ?>
+        </fieldset>
+    <?php endif; ?>
 
-        <label class="filter-option">
-            <input
-                type="checkbox"
-                name="brand[]"
-                value="fisher-price"
-                <?php checked(in_array('fisher-price', $selected_brands, true)); ?>
-            >
-            <span>Fisher-Price</span>
-        </label>
+    <?php if (! empty($age_terms)) : ?>
+        <fieldset class="filter-group">
+            <legend class="filter-group__title">
+                <?php esc_html_e('Вік', 'kidhub'); ?>
+            </legend>
 
-        <label class="filter-option">
-            <input
-                type="checkbox"
-                name="brand[]"
-                value="babyono"
-                <?php checked(in_array('babyono', $selected_brands, true)); ?>
-            >
-            <span>BabyOno</span>
-        </label>
-    </fieldset>
+            <?php foreach ($age_terms as $age) : ?>
+                <label class="filter-option">
+                    <input
+                        type="checkbox"
+                        name="age[]"
+                        value="<?php echo esc_attr($age->slug); ?>"
+                        <?php checked(
+                            in_array(
+                                $age->slug,
+                                $selected_ages,
+                                true
+                            )
+                        ); ?>
+                    >
 
-    <fieldset class="filter-group">
-        <legend class="filter-group__title">Вік</legend>
-
-        <label class="filter-option">
-            <input type="checkbox" name="age[]" value="0-1"
-            <?php checked(in_array('0-1', $selected_ages, true)); ?>
-            >
-            <span>0–1 рік</span>
-        </label>
-
-        <label class="filter-option">
-            <input type="checkbox" name="age[]" value="1-3"
-            <?php checked(in_array('1-3', $selected_ages, true)); ?>
-            >
-            <span>1–3 роки</span>
-        </label>
-
-        <label class="filter-option">
-            <input type="checkbox" name="age[]" value="3-6"
-            <?php checked(in_array('3-6', $selected_ages, true)); ?>
-            >
-            <span>3–6 років</span>
-        </label>
-
-        <label class="filter-option">
-            <input type="checkbox" name="age[]" value="6-plus"
-            <?php checked(in_array('6-plus', $selected_ages, true)); ?>
-            >
-            <span>6+ років</span>
-        </label>
-    </fieldset>
+                    <span><?php echo esc_html($age->name); ?></span>
+                </label>
+            <?php endforeach; ?>
+        </fieldset>
+    <?php endif; ?>
 
     <button type="submit" class="button filters-form__submit">
-        Застосувати фільтри
+        <?php esc_html_e('Застосувати фільтри', 'kidhub'); ?>
     </button>
-
 </form>

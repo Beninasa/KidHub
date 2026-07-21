@@ -268,12 +268,44 @@
 }
 
 .product-card__price {
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+
+  color: var(--color-text);
   font-size: var(--text-lg);
   font-weight: 700;
+  line-height: 1.2;
 }
+
+/* Актуальная цена со скидкой */
+
+.product-card__price ins {
+  order: 1;
+
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+/* Старая цена */
+
+.product-card__price del {
+  order: 2;
+
+  color: var(--color-text-subtle);
+  font-size: var(--text-base);
+  font-weight: 400;
+  text-decoration: line-through;
+  opacity: 1;
+}
+
+/* Старая разметка демонстрационных карточек */
 
 .product-card__old-price {
   color: var(--color-text-subtle);
+  font-size: var(--text-base);
+  font-weight: 400;
   text-decoration: line-through;
 }
 
