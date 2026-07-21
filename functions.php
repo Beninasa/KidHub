@@ -219,3 +219,69 @@ function kidhub_render_related_products()
         ]
     );
 }
+
+/**
+ * Ссылка на корзину со счётчиком товаров.
+ */
+function kidhub_render_cart_link()
+{
+    if (! function_exists('wc_get_cart_url')) {
+        return;
+    }
+
+    $cart_count = (
+        function_exists('WC')
+        && WC()->cart
+    )
+        ? WC()->cart->get_cart_contents_count()
+        : 0;
+
+    $cart_label = sprintf(
+        _n(
+            '%d товар у кошику',
+            '%d товарів у кошику',
+            $cart_count,
+            'kidhub'
+        ),
+        $cart_count
+    );
+    ?>
+
+    <a
+        href="<?php echo esc_url(wc_get_cart_url()); ?>"
+        class="header-actions__cart"
+        aria-label="<?php echo esc_attr($cart_label); ?>"
+    >
+        <span class="header-actions__cart-label">
+            <?php esc_html_e('Кошик', 'kidhub'); ?>
+        </span>
+
+        <span
+            class="header-actions__cart-count"
+            aria-hidden="true"
+        >
+            <?php echo esc_html($cart_count); ?>
+        </span>
+    </a>
+
+    <?php
+}
+
+/**
+ * Обновление счётчика после AJAX-добавления товара.
+ */
+function kidhub_update_cart_fragments($fragments)
+{
+    ob_start();
+
+    kidhub_render_cart_link();
+
+    $fragments['a.header-actions__cart'] = ob_get_clean();
+
+    return $fragments;
+}
+
+add_filter(
+    'woocommerce_add_to_cart_fragments',
+    'kidhub_update_cart_fragments'
+);

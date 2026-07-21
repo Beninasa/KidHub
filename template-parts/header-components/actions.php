@@ -1,7 +1,9 @@
 <div class="header-actions">
 
-    <a href="#">Увійти</a>
+    <a href="#">
+        <?php esc_html_e('Увійти', 'kidhub'); ?>
+    </a>
 
-    <a href="#">Кошик</a>
+    <?php kidhub_render_cart_link(); ?>
 
 </div>
