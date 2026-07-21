@@ -112,11 +112,16 @@ if (function_exists('is_cart') && is_cart()) {
 }
 
 if (function_exists('is_checkout') && is_checkout()) {
+    $checkout_style_path = get_template_directory()
+        . '/assets/css/checkout.css';
+
     wp_enqueue_style(
         'kidhub-checkout',
         get_template_directory_uri() . '/assets/css/checkout.css',
         ['kidhub-catalog'],
-        '1.0'
+        file_exists($checkout_style_path)
+            ? (string) filemtime($checkout_style_path)
+            : '1.0'
     );
 }
 

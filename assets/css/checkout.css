@@ -5,7 +5,7 @@
 }
 
 .woocommerce-checkout .wc-block-components-sidebar-layout {
-  display: grid;
+  display: grid !important;
   grid-template-columns: minmax(0, 2fr) minmax(320px, 1fr);
   align-items: start;
   gap: var(--space-md);
@@ -25,14 +25,12 @@
 }
 
 .woocommerce-checkout .wc-block-checkout__main {
-  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .woocommerce-checkout .wc-block-checkout__sidebar {
   position: sticky;
   top: var(--space-md);
-
-  flex: 0 0 380px;
 }
 
 /* Этапы оформления */
@@ -71,46 +69,86 @@
   font-size: var(--text-sm);
 }
 
+/* Карточка сохранённого адреса */
+
+.woocommerce-checkout .wc-block-components-address-card {
+  padding: var(--space-sm);
+
+  background: #fdfaf7;
+  border: 1px solid rgba(145, 108, 76, 0.35);
+  border-radius: var(--radius-md);
+  box-shadow: 0 2px 6px rgba(18, 18, 18, 0.04);
+}
+
+.woocommerce-checkout .wc-block-components-address-card__edit {
+  color: var(--color-promotion);
+  font-weight: var(--font-semibold);
+  text-underline-offset: 3px;
+
+  transition: var(--transition);
+}
+
+.woocommerce-checkout .wc-block-components-address-card__edit:hover,
+.woocommerce-checkout .wc-block-components-address-card__edit:focus-visible {
+  color: var(--color-brand);
+}
+
 /* Поля формы */
 
 .woocommerce-checkout .wc-block-components-text-input,
+.woocommerce-checkout .wc-block-components-combobox,
 .woocommerce-checkout .wc-block-components-combobox-control {
   margin-bottom: 12px;
 }
 
 .woocommerce-checkout .wc-block-components-text-input input,
+.woocommerce-checkout
+  .wc-block-components-combobox
+  .wc-block-components-combobox-control
+  input.components-combobox-control__input,
 .woocommerce-checkout .wc-block-components-combobox-control input,
+.woocommerce-checkout .wc-block-components-address-form select,
 .woocommerce-checkout .wc-block-components-textarea {
   min-height: 54px;
 
-  background: #fdfaf7 !important;
+  background-color: #fdfaf7 !important;
   border: 1px solid rgba(145, 108, 76, 0.35) !important;
   border-radius: var(--radius-md) !important;
-  box-shadow: 0 2px 6px rgba(18, 18, 18, 0.04);
+  box-shadow: 0 2px 6px rgba(18, 18, 18, 0.04) !important;
 
-  color: var(--color-text);
+  color: var(--color-text) !important;
   font-family: var(--font-primary);
   font-size: var(--text-base);
 
   transition:
+    background-color var(--transition),
     border-color var(--transition),
-    box-shadow var(--transition),
-    background-color var(--transition);
+    box-shadow var(--transition);
 }
 
 .woocommerce-checkout .wc-block-components-text-input input:hover,
+.woocommerce-checkout
+  .wc-block-components-combobox
+  .wc-block-components-combobox-control
+  input.components-combobox-control__input:hover,
 .woocommerce-checkout .wc-block-components-combobox-control input:hover,
+.woocommerce-checkout .wc-block-components-address-form select:hover,
 .woocommerce-checkout .wc-block-components-textarea:hover {
-  background: var(--color-surface) !important;
+  background-color: var(--color-surface) !important;
   border-color: var(--color-brand) !important;
 }
 
 .woocommerce-checkout .wc-block-components-text-input input:focus,
+.woocommerce-checkout
+  .wc-block-components-combobox
+  .wc-block-components-combobox-control
+  input.components-combobox-control__input:focus,
 .woocommerce-checkout .wc-block-components-combobox-control input:focus,
+.woocommerce-checkout .wc-block-components-address-form select:focus,
 .woocommerce-checkout .wc-block-components-textarea:focus {
-  background: var(--color-surface) !important;
+  background-color: var(--color-surface) !important;
   border-color: var(--color-promotion) !important;
-  box-shadow: 0 0 0 3px rgba(186, 158, 136, 0.22);
+  box-shadow: 0 0 0 3px rgba(186, 158, 136, 0.22) !important;
   outline: 0;
 }
 
@@ -121,58 +159,253 @@
   font-weight: var(--font-medium);
 }
 
+.woocommerce-checkout .wc-block-components-combobox-control input,
+.woocommerce-checkout
+  .wc-block-components-combobox-control
+  input.components-combobox-control__input,
+.woocommerce-checkout .wc-block-components-address-form select {
+  padding-right: 48px !important;
+  cursor: pointer;
+}
+
 .woocommerce-checkout .wc-block-components-textarea {
   min-height: 110px;
   padding: 14px;
   resize: vertical;
 }
 
-.woocommerce-checkout
-  .wc-block-components-checkbox
-  .wc-block-components-checkbox__input {
-  width: 18px;
-  height: 18px;
+/* Раскрывающиеся списки страны и области */
 
-  accent-color: var(--color-brand);
-  border-color: var(--color-brand);
-  border-radius: 4px;
+.woocommerce-checkout
+  .wc-block-components-combobox-control__suggestions-container,
+.woocommerce-checkout .components-combobox-control__suggestions-container,
+.woocommerce-checkout .components-form-token-field__suggestions-list,
+.woocommerce-checkout [role="listbox"],
+.components-popover [role="listbox"] {
+  padding: 6px !important;
+
+  background: #fdfaf7 !important;
+  border: 1px solid rgba(145, 108, 76, 0.35) !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: 0 10px 26px rgba(18, 18, 18, 0.12) !important;
+}
+
+.woocommerce-checkout [role="option"],
+.components-popover [role="option"] {
+  padding: 10px 12px;
+
+  background: transparent;
+  border-radius: var(--radius-sm);
+
+  color: var(--color-text);
+  cursor: pointer;
+
+  transition: var(--transition);
+}
+
+.woocommerce-checkout [role="option"]:hover,
+.woocommerce-checkout [role="option"][aria-selected="true"],
+.components-popover [role="option"]:hover,
+.components-popover [role="option"][aria-selected="true"] {
+  background: rgba(186, 158, 136, 0.22) !important;
+  color: var(--color-text) !important;
+}
+
+/* Чекбоксы — как в фильтрах каталога */
+
+.woocommerce-checkout .wc-block-components-checkbox label {
+  cursor: pointer;
+}
+
+.woocommerce-checkout .wc-block-components-checkbox__input[type="checkbox"] {
+  width: 17px !important;
+  min-width: 17px;
+  height: 17px !important;
+  margin: 0;
+
+  appearance: auto !important;
+  -webkit-appearance: auto !important;
+  accent-color: var(--color-promotion);
+
+  background: initial !important;
+  border: initial !important;
+  border-radius: initial !important;
+  box-shadow: none !important;
+
+  cursor: pointer;
+}
+
+.woocommerce-checkout
+  .wc-block-components-checkbox:hover
+  .wc-block-components-checkbox__input {
+  transform: scale(1.05);
+}
+
+.woocommerce-checkout .wc-block-components-checkbox__input:focus-visible {
+  outline: 2px solid rgba(145, 108, 76, 0.3);
+  outline-offset: 2px;
+}
+
+.woocommerce-checkout .wc-block-components-checkbox__mark {
+  display: none;
 }
 
 /* Доставка и оплата */
 
-.woocommerce-checkout .wc-block-components-radio-control {
+.woocommerce-checkout
+  .wc-block-checkout__shipping-option
+  .wc-block-components-radio-control,
+.woocommerce-checkout
+  .wc-block-checkout__payment-method
+  .wc-block-components-radio-control {
+  position: relative;
   overflow: hidden;
 
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  background: #fdfaf7 !important;
+  border: 1px solid rgba(145, 108, 76, 0.35) !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: none !important;
 }
 
-.woocommerce-checkout .wc-block-components-radio-control-accordion-option {
-  padding: var(--space-sm);
+/*
+ * WooCommerce рисует внешнюю рамку вторым слоем через ::after.
+ * Оставляем только обычный border контейнера выше.
+ */
 
-  background: var(--color-surface);
-  border-bottom: 1px solid var(--color-border);
+.woocommerce-checkout
+  .wc-block-checkout__shipping-option
+  .wc-block-components-radio-control--highlight-checked::after,
+.woocommerce-checkout
+  .wc-block-checkout__payment-method
+  .wc-block-components-radio-control--highlight-checked::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* Единый фон во всех состояниях */
+
+.woocommerce-checkout
+  .wc-block-checkout__shipping-option
+  .wc-block-components-radio-control__option,
+.woocommerce-checkout
+  .wc-block-checkout__payment-method
+  .wc-block-components-radio-control__option,
+.woocommerce-checkout
+  .wc-block-checkout__payment-method
+  .wc-block-components-radio-control-accordion-option,
+.woocommerce-checkout
+  .wc-block-checkout__payment-method
+  .wc-block-components-radio-control-accordion-content {
+  background: #fdfaf7 !important;
+  background-image: none !important;
+  filter: none !important;
+  opacity: 1 !important;
+  box-shadow: none !important;
 }
 
 .woocommerce-checkout
-  .wc-block-components-radio-control-accordion-option:last-child {
-  border-bottom: 0;
+  .wc-block-checkout__shipping-option
+  .wc-block-components-radio-control__option:hover,
+.woocommerce-checkout
+  .wc-block-checkout__shipping-option
+  .wc-block-components-radio-control__option:focus-within,
+.woocommerce-checkout
+  .wc-block-checkout__payment-method
+  .wc-block-components-radio-control__option:hover,
+.woocommerce-checkout
+  .wc-block-checkout__payment-method
+  .wc-block-components-radio-control__option:focus-within,
+.woocommerce-checkout
+  .wc-block-checkout__payment-method
+  .wc-block-components-radio-control-accordion-option:hover,
+.woocommerce-checkout
+  .wc-block-checkout__payment-method
+  .wc-block-components-radio-control-accordion-option:focus-within {
+  background: #fdfaf7 !important;
+  box-shadow: none !important;
 }
 
-.woocommerce-checkout .wc-block-components-radio-control__input:checked {
-  border-color: var(--color-brand);
+/*
+ * Убираем внутреннюю рамку выбранного варианта. Селекторы повторяют
+ * фактическую структуру WooCommerce для доставки и оплаты.
+ */
+
+.woocommerce-checkout
+  .wc-block-checkout__shipping-option
+  .wc-block-components-radio-control--highlight-checked
+  label.wc-block-components-radio-control__option--checked-option-highlighted,
+.woocommerce-checkout
+  .wc-block-checkout__payment-method
+  .wc-block-components-radio-control--highlight-checked
+  .wc-block-components-radio-control-accordion-option--checked-option-highlighted,
+.woocommerce-checkout
+  .wc-block-checkout__payment-method
+  .wc-block-components-radio-control--highlight-checked
+  label.wc-block-components-radio-control__option--checked-option-highlighted {
+  background: #fdfaf7 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Разделители между несколькими способами доставки или оплаты */
+
+.woocommerce-checkout
+  .wc-block-checkout__shipping-option
+  .wc-block-components-radio-control__option::after,
+.woocommerce-checkout
+  .wc-block-checkout__payment-method
+  .wc-block-components-radio-control-accordion-option::after {
+  background: rgba(145, 108, 76, 0.2) !important;
+  border: 0 !important;
+  box-shadow: none !important;
 }
 
 .woocommerce-checkout
+  .wc-block-checkout__shipping-option
+  .wc-block-components-radio-control__option:first-child::after,
+.woocommerce-checkout
+  .wc-block-checkout__payment-method
+  .wc-block-components-radio-control-accordion-option:first-child::after {
+  display: none !important;
+}
+
+/* Брендовые радиокнопки */
+
+.woocommerce-checkout
+  .wc-block-checkout__shipping-option
+  .wc-block-components-radio-control__input,
+.woocommerce-checkout
+  .wc-block-checkout__payment-method
+  .wc-block-components-radio-control__input {
+  background: var(--color-surface) !important;
+  border-color: var(--color-promotion) !important;
+  box-shadow: none !important;
+}
+
+.woocommerce-checkout
+  .wc-block-checkout__shipping-option
+  .wc-block-components-radio-control__input:checked,
+.woocommerce-checkout
+  .wc-block-checkout__payment-method
+  .wc-block-components-radio-control__input:checked {
+  border-color: var(--color-promotion) !important;
+}
+
+.woocommerce-checkout
+  .wc-block-checkout__shipping-option
+  .wc-block-components-radio-control__input:checked::before,
+.woocommerce-checkout
+  .wc-block-checkout__payment-method
   .wc-block-components-radio-control__input:checked::before {
-  background: var(--color-brand);
+  background: var(--color-promotion) !important;
 }
 
 /* Итоги заказа */
 
 .woocommerce-checkout .wc-block-components-order-summary {
   padding: 0;
-
   border: 0;
 }
 
@@ -184,7 +417,6 @@
 
 .woocommerce-checkout .wc-block-components-order-summary-item {
   padding: var(--space-sm) 0;
-
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -214,42 +446,53 @@
 
 /* Подтверждение заказа */
 
+.woocommerce-checkout .wc-block-checkout__actions_row {
+  align-items: center;
+  gap: var(--space-sm);
+}
+
 .woocommerce-checkout .wc-block-components-checkout-place-order-button {
-  min-height: 54px;
+  width: 100%;
+  min-height: 64px;
+  padding: 16px 28px;
 
   background: transparent;
   border: 1px solid var(--color-brand);
   border-radius: var(--radius-round);
 
   color: var(--color-brand);
-  font-weight: var(--font-semibold);
+  font-size: var(--text-md);
+  font-weight: var(--font-bold);
+  line-height: 1.2;
 
   transition: var(--transition);
 }
 
-.woocommerce-checkout .wc-block-components-checkout-place-order-button:hover {
+.woocommerce-checkout
+  .wc-block-components-checkout-place-order-button:not(:disabled):hover {
   background: var(--color-brand);
   color: var(--color-text-light);
 }
 
-.woocommerce-checkout .wc-block-checkout__actions_row {
-  align-items: center;
-  gap: var(--space-sm);
-}
-
 /* Ошибки */
 
+.woocommerce-checkout .wc-block-components-validation-error {
+  color: var(--color-error);
+  font-size: var(--text-sm);
+}
+
 .woocommerce-checkout .has-error input,
+.woocommerce-checkout .has-error select,
 .woocommerce-checkout .has-error textarea {
   border-color: var(--color-error) !important;
-  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1) !important;
 }
 
 /* Адаптивность */
 
 @media (max-width: 900px) {
   .woocommerce-checkout .wc-block-components-sidebar-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .woocommerce-checkout .wc-block-checkout__main,
@@ -259,7 +502,6 @@
 
   .woocommerce-checkout .wc-block-checkout__sidebar {
     position: static;
-    flex-basis: auto;
   }
 }
 
@@ -290,189 +532,6 @@
     align-items: stretch;
   }
 
-  .woocommerce-checkout .wc-block-components-checkout-place-order-button {
-    width: 100%;
-  }
-}
-
-/* Финальное оформление элементов Checkout */
-
-/* Выпадающие списки */
-
-.woocommerce-checkout .wc-block-components-combobox-control input {
-  padding-right: 48px !important;
-
-  cursor: pointer;
-}
-
-.woocommerce-checkout .wc-block-components-combobox-control__button,
-.woocommerce-checkout .components-combobox-control__button {
-  right: 14px;
-
-  color: var(--color-brand);
-}
-
-.woocommerce-checkout .components-form-token-field__suggestions-list,
-.woocommerce-checkout .wc-block-components-combobox-control__suggestions-list,
-.woocommerce-checkout [role="listbox"] {
-  padding: 6px;
-
-  background: var(--color-surface);
-  border: 1px solid rgba(145, 108, 76, 0.35);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-control);
-
-  overflow: hidden;
-}
-
-.woocommerce-checkout .components-form-token-field__suggestion,
-.woocommerce-checkout .wc-block-components-combobox-control__suggestion,
-.woocommerce-checkout [role="option"] {
-  padding: 10px 12px;
-
-  border-radius: var(--radius-sm);
-
-  color: var(--color-text);
-  cursor: pointer;
-
-  transition: var(--transition);
-}
-
-.woocommerce-checkout .components-form-token-field__suggestion:hover,
-.woocommerce-checkout .components-form-token-field__suggestion.is-selected,
-.woocommerce-checkout .wc-block-components-combobox-control__suggestion:hover,
-.woocommerce-checkout [role="option"]:hover,
-.woocommerce-checkout [role="option"][aria-selected="true"] {
-  background: #f4ece6;
-  color: var(--color-text);
-}
-
-/* Чекбоксы — как в фильтрах каталога */
-
-.woocommerce-checkout
-  .wc-block-components-checkbox
-  .wc-block-components-checkbox__input[type="checkbox"] {
-  width: 18px;
-  min-width: 18px;
-  height: 18px;
-  margin-top: 1px;
-
-  appearance: none;
-  background: var(--color-surface);
-  border: 1px solid var(--color-brand);
-  border-radius: 4px;
-
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-.woocommerce-checkout
-  .wc-block-components-checkbox
-  .wc-block-components-checkbox__input[type="checkbox"]:hover {
-  transform: scale(1.05);
-}
-
-.woocommerce-checkout
-  .wc-block-components-checkbox
-  .wc-block-components-checkbox__input[type="checkbox"]:checked {
-  background: var(--color-brand);
-  border-color: var(--color-brand);
-}
-
-.woocommerce-checkout
-  .wc-block-components-checkbox
-  .wc-block-components-checkbox__input[type="checkbox"]:focus {
-  outline: 2px solid rgba(186, 158, 136, 0.3);
-  outline-offset: 2px;
-}
-
-.woocommerce-checkout
-  .wc-block-components-checkbox
-  .wc-block-components-checkbox__mark {
-  width: 14px;
-  height: 14px;
-  margin-top: 3px;
-  margin-left: 2px;
-
-  fill: var(--color-text-light);
-}
-
-/* Доставка и оплата */
-
-.woocommerce-checkout .wc-block-components-radio-control {
-  background: var(--color-surface);
-  border: 1px solid rgba(145, 108, 76, 0.35);
-  border-radius: var(--radius-md);
-}
-
-.woocommerce-checkout
-  .wc-block-components-radio-control--highlight-checked::after {
-  border-color: rgba(145, 108, 76, 0.35) !important;
-  border-radius: var(--radius-md);
-}
-
-.woocommerce-checkout .wc-block-components-radio-control-accordion-option {
-  background: var(--color-surface);
-  border-radius: var(--radius-md);
-
-  transition: var(--transition);
-}
-
-.woocommerce-checkout
-  .wc-block-components-radio-control-accordion-option::after {
-  background: rgba(145, 108, 76, 0.25) !important;
-}
-
-.woocommerce-checkout
-  .wc-block-components-radio-control-accordion-option:hover {
-  background: #fdfaf7;
-}
-
-.woocommerce-checkout
-  .wc-block-components-radio-control-accordion-option--checked-option-highlighted,
-.woocommerce-checkout
-  .wc-block-components-radio-control__option--checked-option-highlighted {
-  background: #f4ece6 !important;
-  border-radius: var(--radius-md) !important;
-  box-shadow: 0 0 0 2px var(--color-brand) inset !important;
-}
-
-.woocommerce-checkout
-  .wc-block-components-radio-control
-  .wc-block-components-radio-control__input {
-  background: var(--color-surface);
-  border-color: var(--color-brand);
-}
-
-.woocommerce-checkout
-  .wc-block-components-radio-control
-  .wc-block-components-radio-control__input:checked {
-  border: 2px solid var(--color-brand);
-}
-
-.woocommerce-checkout
-  .wc-block-components-radio-control
-  .wc-block-components-radio-control__input:checked::before {
-  background: var(--color-brand);
-}
-
-.woocommerce-checkout .wc-block-components-radio-control-accordion-content {
-  color: var(--color-text-secondary);
-}
-
-/* Кнопка подтверждения заказа */
-
-.woocommerce-checkout .wc-block-components-checkout-place-order-button {
-  width: 100%;
-  min-height: 64px;
-  padding: 16px 28px;
-
-  font-size: var(--text-md);
-  font-weight: var(--font-bold);
-  line-height: 1.2;
-}
-
-@media (max-width: 520px) {
   .woocommerce-checkout .wc-block-components-checkout-place-order-button {
     min-height: 58px;
     padding: 14px 20px;
