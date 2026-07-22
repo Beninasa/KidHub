@@ -111,7 +111,16 @@ if (function_exists('is_cart') && is_cart()) {
     );
 }
 
-if (function_exists('is_checkout') && is_checkout()) {
+$is_order_received = (
+    function_exists('is_wc_endpoint_url')
+    && is_wc_endpoint_url('order-received')
+);
+
+if (
+    function_exists('is_checkout')
+    && is_checkout()
+    && ! $is_order_received
+) {
     $checkout_style_path = get_template_directory()
         . '/assets/css/checkout.css';
 
@@ -121,6 +130,21 @@ if (function_exists('is_checkout') && is_checkout()) {
         ['kidhub-catalog'],
         file_exists($checkout_style_path)
             ? (string) filemtime($checkout_style_path)
+            : '1.0'
+    );
+}
+
+if ($is_order_received) {
+    $order_confirmation_style_path = get_template_directory()
+        . '/assets/css/order-confirmation.css';
+
+    wp_enqueue_style(
+        'kidhub-order-confirmation',
+        get_template_directory_uri()
+            . '/assets/css/order-confirmation.css',
+        ['kidhub-catalog'],
+        file_exists($order_confirmation_style_path)
+            ? (string) filemtime($order_confirmation_style_path)
             : '1.0'
     );
 }
@@ -298,4 +322,38 @@ function kidhub_update_cart_fragments($fragments)
 add_filter(
     'woocommerce_add_to_cart_fragments',
     'kidhub_update_cart_fragments'
+);
+
+/**
+ * Кнопка возврата в каталог после успешного оформления заказа.
+ */
+function kidhub_render_order_confirmation_actions()
+{
+    if (! function_exists('wc_get_page_permalink')) {
+        return;
+    }
+
+    $catalog_url = wc_get_page_permalink('shop');
+
+    if (! $catalog_url) {
+        $catalog_url = home_url('/');
+    }
+    ?>
+
+    <p class="kidhub-order-confirmation__actions">
+        <a
+            href="<?php echo esc_url($catalog_url); ?>"
+            class="kidhub-order-confirmation__button"
+        >
+            <?php esc_html_e('Повернутися до каталогу', 'kidhub'); ?>
+        </a>
+    </p>
+
+    <?php
+}
+
+add_action(
+    'woocommerce_thankyou',
+    'kidhub_render_order_confirmation_actions',
+    20
 );

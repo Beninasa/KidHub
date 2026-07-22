@@ -404,8 +404,43 @@
 
 /* Итоги заказа */
 
+.woocommerce-checkout
+  .wp-block-woocommerce-checkout-order-summary-block {
+  overflow: hidden;
+
+  background: var(--color-surface);
+  border: 1px solid rgba(145, 108, 76, 0.35);
+  border-radius: var(--radius-md);
+}
+
+.woocommerce-checkout .checkout-order-summary-block-fill {
+  overflow: hidden;
+
+  background: var(--color-surface);
+  border: 1px solid rgba(145, 108, 76, 0.35) !important;
+  border-radius: var(--radius-md) !important;
+}
+
+.woocommerce-checkout
+  .wc-block-components-checkout-order-summary__title {
+  margin: 0;
+  padding: var(--space-sm);
+
+  border-bottom: 1px solid rgba(145, 108, 76, 0.22);
+}
+
+.woocommerce-checkout
+  .wc-block-components-checkout-order-summary__title-text {
+  margin: 0 !important;
+
+  color: var(--color-text);
+  font-size: var(--text-lg) !important;
+  font-weight: var(--font-bold) !important;
+  line-height: var(--line-tight);
+}
+
 .woocommerce-checkout .wc-block-components-order-summary {
-  padding: 0;
+  padding: 0 var(--space-sm);
   border: 0;
 }
 
@@ -416,23 +451,89 @@
 }
 
 .woocommerce-checkout .wc-block-components-order-summary-item {
+  align-items: flex-start;
   padding: var(--space-sm) 0;
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid rgba(145, 108, 76, 0.22);
+}
+
+.woocommerce-checkout
+  .wc-block-components-order-summary-item__image {
+  width: 64px;
+  min-width: 64px;
+  margin-top: var(--space-xs);
+  padding-bottom: 0;
 }
 
 .woocommerce-checkout .wc-block-components-order-summary-item__image img {
+  width: 64px;
+  max-width: 64px;
+  aspect-ratio: 1 / 1;
+
+  background: var(--color-background);
   border-radius: var(--radius-sm);
+
+  object-fit: cover;
+}
+
+.woocommerce-checkout
+  .wc-block-components-order-summary-item__quantity {
+  top: -4px;
+  right: -4px;
+
+  min-width: 22px;
+  min-height: 22px;
+
+  background: var(--color-promotion);
+  color: var(--color-promotion);
+  font-weight: var(--font-bold);
+}
+
+.woocommerce-checkout
+  .wc-block-components-order-summary-item__description {
+  gap: 4px;
+  padding: var(--space-xs) var(--space-xs) var(--space-sm) var(--space-sm);
 }
 
 .woocommerce-checkout .wc-block-components-order-summary-item__description {
   color: var(--color-text);
 }
 
+.woocommerce-checkout
+  .wc-block-components-order-summary-item
+  .wc-block-components-product-name {
+  color: var(--color-text);
+  font-weight: var(--font-semibold);
+  line-height: 1.35;
+  text-decoration: none;
+}
+
+.woocommerce-checkout
+  .wc-block-components-order-summary-item
+  .wc-block-components-product-metadata__description {
+  display: -webkit-box;
+  overflow: hidden;
+
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  line-height: 1.4;
+
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.woocommerce-checkout
+  .wc-block-components-order-summary-item__total-price {
+  padding-top: var(--space-xs);
+
+  color: var(--color-text);
+  font-weight: var(--font-semibold);
+}
+
 .woocommerce-checkout .wc-block-components-totals-wrapper {
-  padding: var(--space-sm) 0;
+  padding: var(--space-sm);
 
   border-top: 0;
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid rgba(145, 108, 76, 0.22);
 }
 
 .woocommerce-checkout .wc-block-components-totals-item__label {
@@ -442,6 +543,75 @@
 .woocommerce-checkout .wc-block-components-totals-item__value {
   color: var(--color-text);
   font-weight: var(--font-semibold);
+}
+
+/* Купон и доставка */
+
+.woocommerce-checkout
+  .wp-block-woocommerce-checkout-order-summary-coupon-form-block,
+.woocommerce-checkout
+  .wp-block-woocommerce-checkout-order-summary-shipping-block {
+  background: #fdfaf7;
+}
+
+.woocommerce-checkout
+  .wp-block-woocommerce-checkout-order-summary-coupon-form-block
+  .wc-block-components-totals-wrapper,
+.woocommerce-checkout
+  .wp-block-woocommerce-checkout-order-summary-shipping-block
+  .wc-block-components-totals-wrapper {
+  background: #fdfaf7;
+}
+
+.woocommerce-checkout
+  .wp-block-woocommerce-checkout-order-summary-coupon-form-block
+  .wc-block-components-panel__button {
+  color: var(--color-text);
+  font-weight: var(--font-semibold);
+}
+
+/* WooCommerce оставляет пустые строки для отсутствующих скидок, сборов и налогов */
+
+.woocommerce-checkout
+  .wp-block-woocommerce-checkout-order-summary-discount-block:empty,
+.woocommerce-checkout
+  .wp-block-woocommerce-checkout-order-summary-fee-block:empty,
+.woocommerce-checkout
+  .wp-block-woocommerce-checkout-order-summary-taxes-block:empty,
+.woocommerce-checkout
+  .wc-block-components-totals-wrapper:empty {
+  display: none;
+}
+
+.woocommerce-checkout
+  .wp-block-woocommerce-checkout-order-summary-discount-block:not(:has(.wc-block-components-totals-item)),
+.woocommerce-checkout
+  .wp-block-woocommerce-checkout-order-summary-fee-block:not(:has(.wc-block-components-totals-item)),
+.woocommerce-checkout
+  .wp-block-woocommerce-checkout-order-summary-taxes-block:not(:has(.wc-block-components-totals-item)) {
+  display: none;
+}
+
+/* Итоговая сумма */
+
+.woocommerce-checkout
+  .wc-block-components-totals-footer-item {
+  padding-top: var(--space-md);
+  padding-bottom: var(--space-md);
+
+  background: var(--color-surface);
+  border-bottom: 0;
+}
+
+.woocommerce-checkout
+  .wc-block-components-totals-footer-item
+  .wc-block-components-totals-item__label,
+.woocommerce-checkout
+  .wc-block-components-totals-footer-item
+  .wc-block-components-totals-item__value {
+  color: var(--color-text);
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
 }
 
 /* Подтверждение заказа */
@@ -503,6 +673,12 @@
   .woocommerce-checkout .wc-block-checkout__sidebar {
     position: static;
   }
+
+  .woocommerce-checkout
+    .wp-block-woocommerce-checkout-order-summary-block {
+    border: 0;
+    border-radius: 0;
+  }
 }
 
 @media (max-width: 520px) {
@@ -525,6 +701,25 @@
 
   .woocommerce-checkout .wc-block-components-checkout-step__title {
     font-size: var(--text-md);
+  }
+
+  .woocommerce-checkout
+    .wc-block-components-checkout-order-summary__title {
+    padding: var(--space-sm) 0;
+  }
+
+  .woocommerce-checkout .wc-block-components-order-summary {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .woocommerce-checkout
+    .wc-block-components-order-summary-item__image,
+  .woocommerce-checkout
+    .wc-block-components-order-summary-item__image img {
+    width: 56px;
+    max-width: 56px;
+    min-width: 56px;
   }
 
   .woocommerce-checkout .wc-block-checkout__actions_row {
