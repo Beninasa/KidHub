@@ -15,6 +15,30 @@ function kidhub_setup()
 
 add_action('after_setup_theme', 'kidhub_setup');
 
+/**
+ * Надёжная проверка страницы успешного оформления заказа.
+ */
+function kidhub_is_order_received_page()
+{
+    if (
+        function_exists('is_order_received_page')
+        && is_order_received_page()
+    ) {
+        return true;
+    }
+
+    if (
+        function_exists('is_wc_endpoint_url')
+        && is_wc_endpoint_url('order-received')
+    ) {
+        return true;
+    }
+
+    global $wp;
+
+    return isset($wp->query_vars['order-received']);
+}
+
 function kidhub_enqueue_styles()
 {
     wp_enqueue_style(
@@ -103,24 +127,23 @@ if (function_exists('is_product') && is_product()) {
 }
 
 if (function_exists('is_cart') && is_cart()) {
+    $cart_style_path = get_template_directory()
+        . '/assets/css/cart.css';
+
     wp_enqueue_style(
         'kidhub-cart',
         get_template_directory_uri() . '/assets/css/cart.css',
         ['kidhub-catalog'],
-        '1.0'
+        file_exists($cart_style_path)
+            ? (string) filemtime($cart_style_path)
+            : '1.0'
     );
 }
 
-$is_order_received = (
-    function_exists('is_wc_endpoint_url')
-    && is_wc_endpoint_url('order-received')
-);
+$is_checkout_page = function_exists('is_checkout') && is_checkout();
+$is_order_received = kidhub_is_order_received_page();
 
-if (
-    function_exists('is_checkout')
-    && is_checkout()
-    && ! $is_order_received
-) {
+if ($is_checkout_page && ! $is_order_received) {
     $checkout_style_path = get_template_directory()
         . '/assets/css/checkout.css';
 
@@ -134,7 +157,7 @@ if (
     );
 }
 
-if ($is_order_received) {
+if ($is_checkout_page || $is_order_received) {
     $order_confirmation_style_path = get_template_directory()
         . '/assets/css/order-confirmation.css';
 
@@ -325,24 +348,58 @@ add_filter(
 );
 
 /**
- * Кнопка возврата в каталог после успешного оформления заказа.
+ * Ссылка на собственную страницу каталога KidHub.
  */
-function kidhub_render_order_confirmation_actions()
+function kidhub_get_catalog_url()
 {
-    if (! function_exists('wc_get_page_permalink')) {
+    $catalog_page = get_page_by_path('catalog', OBJECT, 'page');
+    $catalog_url = $catalog_page instanceof WP_Post
+        ? get_permalink($catalog_page)
+        : '';
+
+    return $catalog_url ?: home_url('/catalog/');
+}
+
+/**
+ * Ссылка для продолжения покупок под кнопкой оформления заказа.
+ */
+function kidhub_render_checkout_continue_shopping()
+{
+    ?>
+
+    <a
+        href="<?php echo esc_url(kidhub_get_catalog_url()); ?>"
+        class="kidhub-checkout__continue-shopping"
+    >
+        <?php esc_html_e('Продовжити покупки', 'kidhub'); ?>
+    </a>
+
+    <?php
+}
+
+/**
+ * Кнопка продолжения покупок после успешного оформления заказа.
+ */
+function kidhub_render_order_confirmation_actions($order_id)
+{
+    if (
+        ! $order_id
+        || ! function_exists('wc_get_order')
+        || ! kidhub_is_order_received_page()
+    ) {
         return;
     }
 
-    $catalog_url = wc_get_page_permalink('shop');
+    $order = wc_get_order($order_id);
 
-    if (! $catalog_url) {
-        $catalog_url = home_url('/');
+    if (! $order instanceof WC_Order || $order->has_status('failed')) {
+        return;
     }
     ?>
 
     <p class="kidhub-order-confirmation__actions">
         <a
-            href="<?php echo esc_url($catalog_url); ?>"
+            href="<?php echo esc_url(kidhub_get_catalog_url()); ?>"
             class="kidhub-order-confirmation__button"
         >
             <?php esc_html_e('Повернутися до каталогу', 'kidhub'); ?>
@@ -355,5 +412,50 @@ function kidhub_render_order_confirmation_actions()
 add_action(
     'woocommerce_thankyou',
     'kidhub_render_order_confirmation_actions',
-    20
+    20,
+    1
+);
+
+/**
+ * Все стандартные ссылки WooCommerce «Вернуться в магазин» ведут в каталог.
+ */
+function kidhub_return_to_shop_redirect($url)
+{
+    return kidhub_get_catalog_url();
+}
+
+add_filter(
+    'woocommerce_return_to_shop_redirect',
+    'kidhub_return_to_shop_redirect'
+);
+
+/**
+ * Ссылка «Перейти в магазин» в блочной пустой корзине.
+ */
+function kidhub_empty_cart_catalog_url($block_content)
+{
+    if (
+        ! function_exists('is_cart')
+        || ! is_cart()
+        || ! function_exists('wc_get_page_permalink')
+    ) {
+        return $block_content;
+    }
+
+    $shop_url = wc_get_page_permalink('shop');
+
+    if (! $shop_url) {
+        return $block_content;
+    }
+
+    return str_replace(
+        $shop_url,
+        kidhub_get_catalog_url(),
+        $block_content
+    );
+}
+
+add_filter(
+    'render_block_woocommerce/empty-cart-block',
+    'kidhub_empty_cart_catalog_url'
 );

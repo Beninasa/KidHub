@@ -1,4 +1,4 @@
-/* Order confirmation */
+/* Classic WooCommerce order confirmation */
 
 .woocommerce-order-received .page {
   padding: var(--space-lg) 0 var(--space-xl);
@@ -9,16 +9,17 @@
   margin: 0 auto;
 }
 
-/* На странице уже есть смысловой H1 от WooCommerce */
-
 .woocommerce-order-received .page__title {
   display: none;
 }
 
-/* Статус заказа */
+.woocommerce-order-received .kidhub-order-confirmation {
+  width: 100%;
+}
 
-.woocommerce-order-received .wc-block-order-confirmation-status,
-.woocommerce-order-received .woocommerce-thankyou-order-received {
+/* Successful order status */
+
+.woocommerce-order-received .kidhub-order-confirmation__status {
   margin: 0 0 var(--space-md);
   padding: var(--space-lg);
 
@@ -30,17 +31,7 @@
   text-align: center;
 }
 
-.woocommerce-order-received .wc-block-order-confirmation-status h1,
-.woocommerce-order-received .woocommerce-thankyou-order-received {
-  font-size: var(--text-2xl);
-  font-weight: var(--font-bold);
-  line-height: var(--line-tight);
-}
-
-.woocommerce-order-received .wc-block-order-confirmation-status h1::before,
-.woocommerce-order-received .woocommerce-thankyou-order-received::before {
-  content: "✓";
-
+.woocommerce-order-received .kidhub-order-confirmation__icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -57,9 +48,16 @@
   line-height: 1;
 }
 
-.woocommerce-order-received
-  .wc-block-order-confirmation-status
-  p {
+.woocommerce-order-received .kidhub-order-confirmation__title {
+  margin: 0;
+
+  color: var(--color-text);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-bold);
+  line-height: var(--line-tight);
+}
+
+.woocommerce-order-received .kidhub-order-confirmation__message {
   max-width: 680px;
   margin: var(--space-xs) auto 0;
 
@@ -67,73 +65,9 @@
   font-size: var(--text-base);
 }
 
-/* Краткая информация: номер, дата, сумма, email и оплата */
+/* Order details card */
 
-.woocommerce-order-received .wc-block-order-confirmation-summary,
-.woocommerce-order-received .woocommerce-order-overview {
-  margin: 0 0 var(--space-md);
-  padding: 0;
-
-  background: var(--color-surface);
-  border: 1px solid rgba(145, 108, 76, 0.25);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-}
-
-.woocommerce-order-received
-  .wc-block-order-confirmation-summary-list,
-.woocommerce-order-received .woocommerce-order-overview {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 0;
-}
-
-.woocommerce-order-received
-  .wc-block-order-confirmation-summary-list-item,
-.woocommerce-order-received .woocommerce-order-overview li {
-  min-width: 0;
-  padding: var(--space-sm);
-
-  border-right: 1px solid rgba(145, 108, 76, 0.2);
-}
-
-.woocommerce-order-received
-  .wc-block-order-confirmation-summary-list-item:last-child,
-.woocommerce-order-received .woocommerce-order-overview li:last-child {
-  border-right: 0;
-}
-
-.woocommerce-order-received
-  .wc-block-order-confirmation-summary-list-item__key,
-.woocommerce-order-received .woocommerce-order-overview li {
-  color: var(--color-text-muted);
-  font-size: var(--text-xs);
-  font-weight: var(--font-medium) !important;
-  line-height: var(--line-normal);
-}
-
-.woocommerce-order-received
-  .wc-block-order-confirmation-summary-list-item__value,
-.woocommerce-order-received .woocommerce-order-overview li strong {
-  display: block;
-  margin-top: 4px;
-
-  color: var(--color-text);
-  font-size: var(--text-base);
-  font-weight: var(--font-semibold);
-  overflow-wrap: anywhere;
-}
-
-/* Общие карточки страницы */
-
-.woocommerce-order-received
-  .wp-block-woocommerce-order-confirmation-totals-wrapper,
-.woocommerce-order-received
-  .wp-block-woocommerce-order-confirmation-downloads-wrapper,
-.woocommerce-order-received
-  .wp-block-woocommerce-order-confirmation-additional-fields-wrapper,
-.woocommerce-order-received .woocommerce-order-details,
-.woocommerce-order-received .woocommerce-customer-details {
+.woocommerce-order-received .woocommerce-order-details {
   margin: 0 0 var(--space-md);
   padding: var(--space-md);
 
@@ -141,18 +75,8 @@
   border-radius: var(--radius-lg);
 }
 
-.woocommerce-order-received
-  .wp-block-woocommerce-order-confirmation-totals-wrapper
-  > .wp-block-heading,
-.woocommerce-order-received
-  .wp-block-woocommerce-order-confirmation-downloads-wrapper
-  > .wp-block-heading,
-.woocommerce-order-received
-  .wp-block-woocommerce-order-confirmation-additional-fields-wrapper
-  > .wp-block-heading,
-.woocommerce-order-received .woocommerce-order-details__title,
-.woocommerce-order-received .woocommerce-column__title {
-  margin: 0 0 var(--space-sm);
+.woocommerce-order-received .woocommerce-order-details__title {
+  margin: 0 0 var(--space-md);
 
   color: var(--color-text);
   font-size: var(--text-xl);
@@ -160,60 +84,96 @@
   line-height: var(--line-tight);
 }
 
-/* Состав заказа */
-
-.woocommerce-order-received .wc-block-order-confirmation-totals {
-  margin-top: 0;
-}
+/* One table: order number, date, products and totals */
 
 .woocommerce-order-received
-  .wc-block-order-confirmation-totals__table,
-.woocommerce-order-received .woocommerce-table--order-details {
+  .woocommerce-table--order-details {
   width: 100%;
+  margin: 0;
 
-  background: #fdfaf7;
-  border: 1px solid rgba(145, 108, 76, 0.3) !important;
+  border: 1px solid rgba(145, 108, 76, 0.24);
   border-collapse: separate;
-  border-radius: var(--radius-md) !important;
   border-spacing: 0;
+  border-radius: var(--radius-md);
   overflow: hidden;
 }
 
 .woocommerce-order-received
-  .wc-block-order-confirmation-totals__table
-  th,
-.woocommerce-order-received
-  .wc-block-order-confirmation-totals__table
-  td,
-.woocommerce-order-received .woocommerce-table--order-details th,
-.woocommerce-order-received .woocommerce-table--order-details td {
-  padding: var(--space-sm) !important;
-
-  border-top: 1px solid rgba(145, 108, 76, 0.2) !important;
-  border-right: 0 !important;
-  border-bottom: 0 !important;
-  border-left: 0 !important;
-}
-
-.woocommerce-order-received
-  .wc-block-order-confirmation-totals__table
-  thead
+  .woocommerce-table--order-details
   th,
 .woocommerce-order-received
   .woocommerce-table--order-details
-  thead
-  th {
-  background: rgba(186, 158, 136, 0.14);
-  border-top: 0 !important;
+  td {
+  padding: 14px var(--space-sm);
+
+  border: 0;
+  border-bottom: 1px solid rgba(145, 108, 76, 0.2);
 
   color: var(--color-text);
+  font-size: var(--text-sm);
+  line-height: var(--line-normal);
+  text-align: left;
+  vertical-align: top;
+}
+
+.woocommerce-order-received
+  .woocommerce-table--order-details
+  .kidhub-order-details__columns
+  th {
+  background: rgba(186, 158, 136, 0.14);
+
   font-weight: var(--font-semibold);
 }
 
 .woocommerce-order-received
-  .wc-block-order-confirmation-totals__table
-  tfoot
-  tr:last-child,
+  .woocommerce-table--order-details
+  .kidhub-order-details__meta-row
+  th,
+.woocommerce-order-received
+  .woocommerce-table--order-details
+  .kidhub-order-details__meta-row
+  td {
+  background: #fdfaf7;
+}
+
+.woocommerce-order-received
+  .woocommerce-table--order-details
+  .kidhub-order-details__meta-row
+  th {
+  color: var(--color-text-secondary);
+  font-weight: var(--font-semibold);
+}
+
+.woocommerce-order-received
+  .woocommerce-table--order-details
+  .kidhub-order-details__meta-row
+  td {
+  color: var(--color-text);
+  font-weight: var(--font-bold);
+}
+
+.woocommerce-order-received
+  .woocommerce-table--order-details
+  .product-total,
+.woocommerce-order-received
+  .woocommerce-table--order-details
+  td:last-child {
+  text-align: right;
+}
+
+.woocommerce-order-received
+  .woocommerce-table--order-details
+  tbody
+  tr:last-child
+  th,
+.woocommerce-order-received
+  .woocommerce-table--order-details
+  tbody
+  tr:last-child
+  td {
+  border-bottom: 1px solid rgba(145, 108, 76, 0.2);
+}
+
 .woocommerce-order-received
   .woocommerce-table--order-details
   tfoot
@@ -221,16 +181,6 @@
   background: rgba(186, 158, 136, 0.14);
 }
 
-.woocommerce-order-received
-  .wc-block-order-confirmation-totals__table
-  tfoot
-  tr:last-child
-  th,
-.woocommerce-order-received
-  .wc-block-order-confirmation-totals__table
-  tfoot
-  tr:last-child
-  td,
 .woocommerce-order-received
   .woocommerce-table--order-details
   tfoot
@@ -241,14 +191,15 @@
   tfoot
   tr:last-child
   td {
+  border-bottom: 0;
+
   font-size: var(--text-md);
   font-weight: var(--font-bold);
 }
 
 .woocommerce-order-received
-  .wc-block-order-confirmation-totals__table
-  a,
-.woocommerce-order-received .woocommerce-table--order-details a {
+  .woocommerce-table--order-details
+  a {
   color: var(--color-text);
   font-weight: var(--font-semibold);
   text-decoration: none;
@@ -257,33 +208,79 @@
 }
 
 .woocommerce-order-received
-  .wc-block-order-confirmation-totals__table
+  .woocommerce-table--order-details
   a:hover,
-.woocommerce-order-received .woocommerce-table--order-details a:hover {
+.woocommerce-order-received
+  .woocommerce-table--order-details
+  a:focus-visible {
   color: var(--color-brand);
 }
 
-/* Адреса */
+.woocommerce-order-received
+  .woocommerce-table--order-details
+  .product-quantity {
+  color: var(--color-promotion);
+  font-weight: var(--font-bold);
+}
 
-.woocommerce-order-received .wc-block-order-confirmation-address-wrapper {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-md);
+.woocommerce-order-received
+  .woocommerce-table--order-details
+  .wc-item-meta {
+  margin-top: var(--space-xs);
+
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+}
+
+/* Customer addresses */
+
+.woocommerce-order-received .woocommerce-customer-details {
   margin: 0 0 var(--space-md);
 }
 
 .woocommerce-order-received
-  .wc-block-order-confirmation-address-wrapper
-  > .wp-block-column {
-  min-width: 0;
+  .woocommerce-customer-details
+  > .woocommerce-column__title {
+  margin: 0;
+  padding: var(--space-md) var(--space-md) 0;
+
+  background: var(--color-surface);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+
+  color: var(--color-text);
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
+  line-height: var(--line-tight);
 }
 
 .woocommerce-order-received
-  .wp-block-woocommerce-order-confirmation-shipping-wrapper,
+  .woocommerce-customer-details
+  > address {
+  padding: var(--space-sm) var(--space-md) var(--space-md);
+
+  background: var(--color-surface);
+  border: 0;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+
+  color: var(--color-text-secondary);
+  font-style: normal;
+  line-height: var(--line-relaxed);
+}
+
 .woocommerce-order-received
-  .wp-block-woocommerce-order-confirmation-billing-wrapper,
-.woocommerce-order-received .woocommerce-customer-details address {
-  height: 100%;
+  .woocommerce-columns--addresses {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-md);
+  margin: 0;
+}
+
+.woocommerce-order-received
+  .woocommerce-columns--addresses
+  .woocommerce-column {
+  float: none;
+  width: auto;
+  min-width: 0;
   padding: var(--space-md);
 
   background: var(--color-surface);
@@ -291,33 +288,60 @@
 }
 
 .woocommerce-order-received
-  .wp-block-woocommerce-order-confirmation-shipping-wrapper
-  > .wp-block-heading,
-.woocommerce-order-received
-  .wp-block-woocommerce-order-confirmation-billing-wrapper
-  > .wp-block-heading {
+  .woocommerce-columns--addresses
+  .woocommerce-column__title {
   margin: 0 0 var(--space-sm);
 
   color: var(--color-text);
   font-size: var(--text-lg);
   font-weight: var(--font-bold);
+  line-height: var(--line-tight);
 }
 
 .woocommerce-order-received
-  .wp-block-woocommerce-order-confirmation-shipping-address,
-.woocommerce-order-received
-  .wp-block-woocommerce-order-confirmation-billing-address,
-.woocommerce-order-received .woocommerce-customer-details address {
+  .woocommerce-columns--addresses
+  address {
+  padding: 0;
+
+  border: 0;
+
   color: var(--color-text-secondary);
   font-style: normal;
   line-height: var(--line-relaxed);
 }
 
-.woocommerce-order-received .woocommerce-customer-details--phone {
+.woocommerce-order-received .woocommerce-customer-details--phone,
+.woocommerce-order-received .woocommerce-customer-details--email {
   margin-top: var(--space-xs);
 }
 
-/* Возврат в каталог */
+/* Failed and generic order notices */
+
+.woocommerce-order-received .woocommerce-thankyou-order-failed,
+.woocommerce-order-received .woocommerce-thankyou-order-received,
+.woocommerce-order-received .woocommerce-notice {
+  margin: 0 0 var(--space-md);
+  padding: var(--space-md);
+
+  background: var(--color-surface);
+  border: 1px solid rgba(145, 108, 76, 0.35);
+  border-radius: var(--radius-md);
+
+  color: var(--color-text);
+}
+
+.woocommerce-order-received .woocommerce-thankyou-order-failed {
+  border-color: rgba(220, 38, 38, 0.45);
+}
+
+.woocommerce-order-received
+  .woocommerce-thankyou-order-failed-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+/* Continue shopping */
 
 .woocommerce-order-received .kidhub-order-confirmation__actions {
   display: flex;
@@ -345,93 +369,78 @@
   transition: var(--transition);
 }
 
-.woocommerce-order-received .kidhub-order-confirmation__button:hover,
-.woocommerce-order-received .kidhub-order-confirmation__button:focus-visible {
+.woocommerce-order-received
+  .kidhub-order-confirmation__button:hover,
+.woocommerce-order-received
+  .kidhub-order-confirmation__button:focus-visible {
   background: var(--color-brand);
   color: var(--color-text-light);
   transform: translateY(-2px);
 }
 
-/* Адаптивность */
-
-@media (max-width: 900px) {
-  .woocommerce-order-received
-    .wc-block-order-confirmation-summary-list,
-  .woocommerce-order-received .woocommerce-order-overview {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .woocommerce-order-received
-    .wc-block-order-confirmation-summary-list-item,
-  .woocommerce-order-received .woocommerce-order-overview li,
-  .woocommerce-order-received
-    .wc-block-order-confirmation-summary-list-item:last-child,
-  .woocommerce-order-received
-    .woocommerce-order-overview
-    li:last-child {
-    border-right: 0;
-    border-bottom: 1px solid rgba(145, 108, 76, 0.2);
-  }
-
-  .woocommerce-order-received
-    .wc-block-order-confirmation-summary-list-item:last-child,
-  .woocommerce-order-received
-    .woocommerce-order-overview
-    li:last-child {
-    border-bottom: 0;
-  }
-}
+/* Responsive layout */
 
 @media (max-width: 680px) {
   .woocommerce-order-received .page {
     padding: var(--space-md) 0 var(--space-lg);
   }
 
-  .woocommerce-order-received .wc-block-order-confirmation-status,
-  .woocommerce-order-received .woocommerce-thankyou-order-received {
-    padding: var(--space-md) var(--space-sm);
-  }
-
-  .woocommerce-order-received .wc-block-order-confirmation-status h1,
-  .woocommerce-order-received .woocommerce-thankyou-order-received {
-    font-size: var(--text-xl);
-  }
-
-  .woocommerce-order-received
-    .wc-block-order-confirmation-summary-list,
-  .woocommerce-order-received .woocommerce-order-overview,
-  .woocommerce-order-received
-    .wc-block-order-confirmation-address-wrapper {
-    grid-template-columns: 1fr;
-  }
-
-  .woocommerce-order-received
-    .wp-block-woocommerce-order-confirmation-totals-wrapper,
-  .woocommerce-order-received
-    .wp-block-woocommerce-order-confirmation-downloads-wrapper,
-  .woocommerce-order-received
-    .wp-block-woocommerce-order-confirmation-additional-fields-wrapper,
-  .woocommerce-order-received
-    .wp-block-woocommerce-order-confirmation-shipping-wrapper,
-  .woocommerce-order-received
-    .wp-block-woocommerce-order-confirmation-billing-wrapper,
+  .woocommerce-order-received .kidhub-order-confirmation__status,
   .woocommerce-order-received .woocommerce-order-details,
-  .woocommerce-order-received .woocommerce-customer-details {
+  .woocommerce-order-received
+    .woocommerce-columns--addresses
+    .woocommerce-column {
     padding: var(--space-sm);
   }
 
   .woocommerce-order-received
-    .wc-block-order-confirmation-totals__table
-    th,
-  .woocommerce-order-received
-    .wc-block-order-confirmation-totals__table
-    td,
-  .woocommerce-order-received .woocommerce-table--order-details th,
-  .woocommerce-order-received .woocommerce-table--order-details td {
-    padding: 12px !important;
+    .woocommerce-customer-details
+    > .woocommerce-column__title {
+    padding: var(--space-sm) var(--space-sm) 0;
   }
 
-  .woocommerce-order-received .kidhub-order-confirmation__button {
+  .woocommerce-order-received
+    .woocommerce-customer-details
+    > address {
+    padding: var(--space-xs) var(--space-sm) var(--space-sm);
+  }
+
+  .woocommerce-order-received .kidhub-order-confirmation__title {
+    font-size: var(--text-xl);
+  }
+
+  .woocommerce-order-received .woocommerce-order-details__title {
+    font-size: var(--text-lg);
+  }
+
+  .woocommerce-order-received
+    .woocommerce-columns--addresses {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .woocommerce-order-received
+    .woocommerce-table--order-details
+    th,
+  .woocommerce-order-received
+    .woocommerce-table--order-details
+    td {
+    padding: 12px;
+  }
+
+  .woocommerce-order-received
+    .kidhub-order-confirmation__button {
     width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .woocommerce-order-received
+    .woocommerce-table--order-details
+    th,
+  .woocommerce-order-received
+    .woocommerce-table--order-details
+    td {
+    padding: 10px;
+    overflow-wrap: anywhere;
   }
 }
