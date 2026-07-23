@@ -3,7 +3,7 @@
     <ul class="navigation__list">
 
         <li>
-            <a href="<?php echo esc_url(home_url('/catalog/')); ?>">
+            <a href="<?php echo esc_url(kidhub_get_catalog_url()); ?>">
                 Каталог
              </a>
         </li>

@@ -232,87 +232,81 @@
   font-size: var(--text-xs);
 }
 
-/* Customer addresses */
+/* Delivery details card */
 
-.woocommerce-order-received .woocommerce-customer-details {
+.woocommerce-order-received .kidhub-delivery-details {
   margin: 0 0 var(--space-md);
-}
-
-.woocommerce-order-received
-  .woocommerce-customer-details
-  > .woocommerce-column__title {
-  margin: 0;
-  padding: var(--space-md) var(--space-md) 0;
-
-  background: var(--color-surface);
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-
-  color: var(--color-text);
-  font-size: var(--text-lg);
-  font-weight: var(--font-bold);
-  line-height: var(--line-tight);
-}
-
-.woocommerce-order-received
-  .woocommerce-customer-details
-  > address {
-  padding: var(--space-sm) var(--space-md) var(--space-md);
-
-  background: var(--color-surface);
-  border: 0;
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-
-  color: var(--color-text-secondary);
-  font-style: normal;
-  line-height: var(--line-relaxed);
-}
-
-.woocommerce-order-received
-  .woocommerce-columns--addresses {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-md);
-  margin: 0;
-}
-
-.woocommerce-order-received
-  .woocommerce-columns--addresses
-  .woocommerce-column {
-  float: none;
-  width: auto;
-  min-width: 0;
   padding: var(--space-md);
 
   background: var(--color-surface);
   border-radius: var(--radius-lg);
 }
 
-.woocommerce-order-received
-  .woocommerce-columns--addresses
-  .woocommerce-column__title {
-  margin: 0 0 var(--space-sm);
+.woocommerce-order-received .kidhub-delivery-details__title {
+  margin: 0 0 var(--space-md);
 
   color: var(--color-text);
-  font-size: var(--text-lg);
+  font-size: var(--text-xl);
   font-weight: var(--font-bold);
   line-height: var(--line-tight);
 }
 
-.woocommerce-order-received
-  .woocommerce-columns--addresses
-  address {
-  padding: 0;
+.woocommerce-order-received .kidhub-delivery-details__table {
+  overflow: hidden;
 
-  border: 0;
-
-  color: var(--color-text-secondary);
-  font-style: normal;
-  line-height: var(--line-relaxed);
+  border: 1px solid rgba(145, 108, 76, 0.24);
+  border-radius: var(--radius-md);
 }
 
-.woocommerce-order-received .woocommerce-customer-details--phone,
-.woocommerce-order-received .woocommerce-customer-details--email {
-  margin-top: var(--space-xs);
+.woocommerce-order-received .kidhub-delivery-details__row {
+  display: grid;
+  grid-template-columns: minmax(170px, 0.8fr) minmax(0, 2fr);
+
+  border-bottom: 1px solid rgba(145, 108, 76, 0.2);
+}
+
+.woocommerce-order-received
+  .kidhub-delivery-details__row:last-child {
+  border-bottom: 0;
+}
+
+.woocommerce-order-received .kidhub-delivery-details__label,
+.woocommerce-order-received .kidhub-delivery-details__value {
+  min-width: 0;
+  margin: 0;
+  padding: 14px var(--space-sm);
+
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  line-height: var(--line-normal);
+}
+
+.woocommerce-order-received .kidhub-delivery-details__label {
+  background: #fdfaf7;
+
+  color: var(--color-text-secondary);
+  font-weight: var(--font-semibold);
+}
+
+.woocommerce-order-received address.kidhub-delivery-details__value {
+  border: 0 !important;
+
+  font-style: normal;
+}
+
+.woocommerce-order-received a.kidhub-delivery-details__value {
+  font-weight: var(--font-semibold);
+  overflow-wrap: anywhere;
+  text-decoration: none;
+
+  transition: color var(--transition);
+}
+
+.woocommerce-order-received
+  a.kidhub-delivery-details__value:hover,
+.woocommerce-order-received
+  a.kidhub-delivery-details__value:focus-visible {
+  color: var(--color-brand);
 }
 
 /* Failed and generic order notices */
@@ -387,22 +381,8 @@
 
   .woocommerce-order-received .kidhub-order-confirmation__status,
   .woocommerce-order-received .woocommerce-order-details,
-  .woocommerce-order-received
-    .woocommerce-columns--addresses
-    .woocommerce-column {
+  .woocommerce-order-received .kidhub-delivery-details {
     padding: var(--space-sm);
-  }
-
-  .woocommerce-order-received
-    .woocommerce-customer-details
-    > .woocommerce-column__title {
-    padding: var(--space-sm) var(--space-sm) 0;
-  }
-
-  .woocommerce-order-received
-    .woocommerce-customer-details
-    > address {
-    padding: var(--space-xs) var(--space-sm) var(--space-sm);
   }
 
   .woocommerce-order-received .kidhub-order-confirmation__title {
@@ -413,9 +393,12 @@
     font-size: var(--text-lg);
   }
 
-  .woocommerce-order-received
-    .woocommerce-columns--addresses {
-    grid-template-columns: minmax(0, 1fr);
+  .woocommerce-order-received .kidhub-delivery-details__title {
+    font-size: var(--text-lg);
+  }
+
+  .woocommerce-order-received .kidhub-delivery-details__row {
+    grid-template-columns: minmax(130px, 0.8fr) minmax(0, 2fr);
   }
 
   .woocommerce-order-received
@@ -434,6 +417,20 @@
 }
 
 @media (max-width: 480px) {
+  .woocommerce-order-received .kidhub-delivery-details__row {
+    display: block;
+  }
+
+  .woocommerce-order-received .kidhub-delivery-details__label,
+  .woocommerce-order-received .kidhub-delivery-details__value {
+    display: block;
+    padding: 10px;
+  }
+
+  .woocommerce-order-received .kidhub-delivery-details__value {
+    padding-top: 0;
+  }
+
   .woocommerce-order-received
     .woocommerce-table--order-details
     th,

@@ -69,11 +69,16 @@ function kidhub_enqueue_styles()
         '1.0'
     );
 
+    $header_style_path = get_template_directory()
+        . '/assets/css/header.css';
+
     wp_enqueue_style(
         'kidhub-header',
         get_template_directory_uri() . '/assets/css/header.css',
         ['kidhub-layout'],
-        '1.0'
+        file_exists($header_style_path)
+            ? (string) filemtime($header_style_path)
+            : '1.0'
     );
 
     wp_enqueue_style(
@@ -146,6 +151,8 @@ $is_order_received = kidhub_is_order_received_page();
 if ($is_checkout_page && ! $is_order_received) {
     $checkout_style_path = get_template_directory()
         . '/assets/css/checkout.css';
+    $checkout_script_path = get_template_directory()
+        . '/assets/js/checkout.js';
 
     wp_enqueue_style(
         'kidhub-checkout',
@@ -154,6 +161,16 @@ if ($is_checkout_page && ! $is_order_received) {
         file_exists($checkout_style_path)
             ? (string) filemtime($checkout_style_path)
             : '1.0'
+    );
+
+    wp_enqueue_script(
+        'kidhub-checkout-actions',
+        get_template_directory_uri() . '/assets/js/checkout.js',
+        [],
+        file_exists($checkout_script_path)
+            ? (string) filemtime($checkout_script_path)
+            : '1.0',
+        true
     );
 }
 
@@ -313,9 +330,25 @@ function kidhub_render_cart_link()
         class="header-actions__cart"
         aria-label="<?php echo esc_attr($cart_label); ?>"
     >
-        <span class="header-actions__cart-label">
-            <?php esc_html_e('Кошик', 'kidhub'); ?>
-        </span>
+        <svg
+            class="header-actions__cart-icon"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
+            focusable="false"
+        >
+            <path
+                d="M3 4h2.2l2.1 9.3a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.6L20.6 8H6.1"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+            <circle cx="9.5" cy="19" r="1.25" fill="currentColor" />
+            <circle cx="17.2" cy="19" r="1.25" fill="currentColor" />
+        </svg>
 
         <span
             class="header-actions__cart-count"
@@ -352,12 +385,7 @@ add_filter(
  */
 function kidhub_get_catalog_url()
 {
-    $catalog_page = get_page_by_path('catalog', OBJECT, 'page');
-    $catalog_url = $catalog_page instanceof WP_Post
-        ? get_permalink($catalog_page)
-        : '';
-
-    return $catalog_url ?: home_url('/catalog/');
+    return home_url('/catalog/');
 }
 
 /**
@@ -371,6 +399,7 @@ function kidhub_render_checkout_continue_shopping()
         href="<?php echo esc_url(kidhub_get_catalog_url()); ?>"
         class="kidhub-checkout__continue-shopping"
     >
+        <span aria-hidden="true">←</span>
         <?php esc_html_e('Продовжити покупки', 'kidhub'); ?>
     </a>
 

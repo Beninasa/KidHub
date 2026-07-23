@@ -94,17 +94,22 @@
 .header-actions__cart {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
+  line-height: 1;
+}
+
+.header-actions__cart-icon {
+  display: block;
+  flex: 0 0 auto;
 }
 
 .header-actions__cart-count {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  place-items: center;
 
   min-width: 22px;
   height: 22px;
-  padding: 0 6px;
+  padding: 1px 6px 0;
 
   background: var(--color-text-light);
   border-radius: 999px;
@@ -113,6 +118,7 @@
   font-size: var(--text-xs);
   font-weight: var(--font-bold);
   line-height: 1;
+  text-align: center;
 
   transition: var(--transition);
 }

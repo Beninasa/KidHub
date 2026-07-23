@@ -404,9 +404,29 @@
 
 /* Итоги заказа */
 
-.woocommerce-checkout .wc-block-components-order-summary {
+.woocommerce-checkout
+  .wc-block-checkout__sidebar
+  .wp-block-woocommerce-checkout-order-summary-block,
+.woocommerce-checkout
+  .wc-block-checkout__sidebar
+  .wc-block-components-order-summary,
+.woocommerce-checkout
+  .wc-block-checkout__sidebar
+  .wc-block-components-order-summary__content {
   padding: 0;
-  border: 0;
+
+  background: transparent;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.woocommerce-checkout
+  .wc-block-checkout__sidebar
+  .wc-block-components-order-summary__button {
+  padding: 0 0 var(--space-sm);
+
+  border-bottom: 1px solid var(--color-border);
 }
 
 .woocommerce-checkout .wc-block-components-order-summary__button-text {
@@ -451,6 +471,12 @@
   gap: var(--space-sm);
 }
 
+.woocommerce-checkout
+  .wc-block-checkout__actions_row.kidhub-checkout__actions-row {
+  flex-direction: column;
+  align-items: stretch;
+}
+
 .woocommerce-checkout .wc-block-components-checkout-place-order-button {
   width: 100%;
   min-height: 64px;
@@ -475,30 +501,32 @@
 }
 
 .woocommerce-checkout .kidhub-checkout__continue-shopping {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: fit-content;
-  min-height: 48px;
-  margin: 0 0 var(--space-lg) auto;
-  padding: 12px 24px;
+  align-self: center;
+  gap: 6px;
+  width: auto;
+  min-height: 0;
+  margin: 0;
+  padding: 0 0 3px;
 
   background: transparent;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-round);
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  border-radius: 0;
 
   color: var(--color-brand);
   font-weight: var(--font-semibold);
   text-decoration: none;
 
-  transition: var(--transition);
+  transition: color var(--transition);
 }
 
 .woocommerce-checkout .kidhub-checkout__continue-shopping:hover,
 .woocommerce-checkout .kidhub-checkout__continue-shopping:focus-visible {
-  background: var(--color-brand);
-  border-color: var(--color-brand);
-  color: var(--color-text-light);
+  background: transparent;
+  color: var(--color-dark);
 }
 
 /* Ошибки */
@@ -554,20 +582,10 @@
     font-size: var(--text-md);
   }
 
-  .woocommerce-checkout .wc-block-checkout__actions_row {
-    flex-direction: column-reverse;
-    align-items: stretch;
-  }
-
   .woocommerce-checkout .wc-block-components-checkout-place-order-button {
     min-height: 58px;
     padding: 14px 20px;
 
     font-size: var(--text-base);
-  }
-
-  .woocommerce-checkout .kidhub-checkout__continue-shopping {
-    width: 100%;
-    margin-bottom: var(--space-md);
   }
 }
